@@ -1,0 +1,8 @@
+{
+  "name": "考夫子教评助手 Demo",
+  "appid": "__UNI__KAOFUZI_DEMO",
+  "description": "只保留真机 Demo 内容的 Vue / uni-app 迁移版本",
+  "versionName": "0.1.0",
+  "versionCode": "100",
+  "transformPx": false
+}

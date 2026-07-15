@@ -1,0 +1,726 @@
+.mode-normal {
+  --normal-radius-lg: 18px;
+  --normal-radius-md: 14px;
+  --normal-shadow: 0 10px 24px rgba(73, 89, 108, 0.07);
+}
+
+.mode-normal .phone-app {
+  background: #f6f7f9;
+}
+
+.mode-normal .app-header {
+  height: 60px;
+  padding: 8px 16px;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+}
+
+.mode-normal .app-logo,
+.mode-normal .icon-button,
+.mode-normal .profile-button,
+.mode-normal .header-placeholder {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+}
+
+.mode-normal .header-copy strong {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.mode-normal .header-copy span {
+  font-size: 11px;
+}
+
+.mode-normal .screen-content {
+  height: calc(100% - 60px);
+  padding: 14px 16px 84px;
+}
+
+.mode-normal .bottom-nav {
+  height: 66px;
+  padding: 5px 12px max(6px, env(safe-area-inset-bottom));
+}
+
+.mode-normal .bottom-nav button {
+  gap: 2px;
+  font-size: 11px;
+}
+
+.mode-normal .bottom-nav svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mode-normal .primary-button,
+.mode-normal .insight-primary-button,
+.mode-normal .feedback-primary-button,
+.mode-normal .wrong-book-primary-button,
+.mode-normal .account-primary-button,
+.mode-normal .learning-primary-button,
+.mode-normal .progress-primary-button,
+.mode-normal .study-survey-primary-button {
+  min-height: 48px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 10px 18px rgba(58, 104, 214, 0.14);
+}
+
+.mode-normal .home-dashboard-content {
+  padding: 12px 14px 78px;
+}
+
+.mode-normal .home-dashboard-hero {
+  gap: 10px;
+  margin: 10px 0;
+  padding-bottom: 4px;
+}
+
+.mode-normal .home-hero-copy-mini p {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.mode-normal .home-panel {
+  padding: 13px;
+  border-radius: var(--normal-radius-lg);
+  box-shadow: var(--normal-shadow);
+}
+
+.mode-normal .home-panel-heading {
+  margin-bottom: 8px;
+}
+
+.mode-normal .home-panel-heading strong {
+  font-size: 15px;
+}
+
+.mode-normal .home-panel-heading span,
+.mode-normal .home-task-inline small,
+.mode-normal .home-task-inline span,
+.mode-normal .home-task-inline strong {
+  font-size: 11px;
+}
+
+.mode-normal .task-value-chips {
+  margin-bottom: 10px;
+}
+
+.mode-normal .task-value-chips span {
+  min-height: 24px;
+  padding: 0 8px;
+  font-size: 11px;
+}
+
+.mode-normal .home-task-card h2 {
+  font-size: 24px;
+}
+
+.mode-normal .home-task-side > p {
+  font-size: 16px;
+}
+
+.mode-normal .task-card-meta span {
+  font-size: 12px;
+}
+
+.mode-normal .home-shortcut-grid,
+.mode-normal .home-stats-grid {
+  gap: 9px;
+}
+
+.mode-normal .home-shortcut-card {
+  grid-template-columns: 44px minmax(0, 1fr);
+  min-height: 76px;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.mode-normal .home-shortcut-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+}
+
+.mode-normal .home-shortcut-card strong {
+  font-size: 15px;
+}
+
+.mode-normal .home-shortcut-card small {
+  font-size: 11px;
+}
+
+.mode-normal .insight-content,
+.mode-normal .learning-dashboard-content,
+.mode-normal .profile-account-content,
+.mode-normal .account-detail-content,
+.mode-normal .study-survey-content,
+.mode-normal .progress-insight-content,
+.mode-normal .wrong-book-content,
+.mode-normal .wrong-book-detail-content,
+.mode-normal .feedback-content,
+.mode-normal .mastered-content,
+.mode-normal .retry-content,
+.mode-normal .wrong-content,
+.mode-normal .question-flow-content,
+.mode-normal .photo-content,
+.mode-normal .photo-sim-content,
+.mode-normal .photo-design-content {
+  gap: 10px;
+  padding-top: 10px;
+}
+
+.mode-normal .insight-hero-card,
+.mode-normal .insight-section-card,
+.mode-normal .insight-note-card,
+.mode-normal .profile-hero-panel,
+.mode-normal .account-hero-card,
+.mode-normal .account-section,
+.mode-normal .wrong-book-hero-card,
+.mode-normal .wrong-book-focus-card,
+.mode-normal .wrong-book-summary-card,
+.mode-normal .wrong-book-detail-hero,
+.mode-normal .wrong-book-detail-list-card,
+.mode-normal .feedback-hero-card,
+.mode-normal .feedback-stat-card,
+.mode-normal .feedback-tip-card,
+.mode-normal .photo-stage-panel,
+.mode-normal .photo-content-card,
+.mode-normal .photo-surface-card {
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--normal-radius-lg);
+  box-shadow: var(--normal-shadow);
+}
+
+.mode-normal .insight-hero-top,
+.mode-normal .account-hero-top,
+.mode-normal .wrong-book-hero-top,
+.mode-normal .feedback-hero-top {
+  grid-template-columns: minmax(0, 1fr) 56px;
+  gap: 12px;
+}
+
+.mode-normal .insight-hero-icon,
+.mode-normal .account-hero-icon,
+.mode-normal .wrong-book-hero-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+}
+
+.mode-normal .insight-kicker,
+.mode-normal .account-kicker,
+.mode-normal .wrong-book-eyebrow,
+.mode-normal .result-eyebrow,
+.mode-normal .photo-design-kicker,
+.mode-normal .photo-stage-badge {
+  min-height: 24px;
+  padding: 0 9px;
+  font-size: 11px;
+}
+
+.mode-normal .insight-hero-copy {
+  gap: 7px;
+}
+
+.mode-normal .insight-hero-copy h2,
+.mode-normal .account-hero-top h2,
+.mode-normal .wrong-book-hero-copy h2,
+.mode-normal .feedback-hero-card h2,
+.mode-normal .photo-design-hero h2,
+.mode-normal .photo-intro-card h2,
+.mode-normal .progress-keyline strong {
+  font-size: 22px;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.mode-normal .insight-hero-copy p,
+.mode-normal .account-hero-top p,
+.mode-normal .wrong-book-hero-copy p,
+.mode-normal .feedback-hero-card > p,
+.mode-normal .photo-design-hero p,
+.mode-normal .photo-intro-card p,
+.mode-normal .progress-compare-card p,
+.mode-normal .progress-growth-copy p,
+.mode-normal .account-feature-card p,
+.mode-normal .study-survey-field-head span {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.mode-normal .insight-stat-grid,
+.mode-normal .wrong-book-stat-grid,
+.mode-normal .wrong-book-summary-grid,
+.mode-normal .feedback-analysis-grid,
+.mode-normal .learning-progress-grid,
+.mode-normal .photo-metric-grid {
+  gap: 8px;
+}
+
+.mode-normal .insight-stat-card,
+.mode-normal .wrong-book-stat-card,
+.mode-normal .wrong-book-summary-item,
+.mode-normal .feedback-analysis-item,
+.mode-normal .learning-progress-card,
+.mode-normal .photo-metric-card,
+.mode-normal .account-info-row {
+  min-height: auto;
+  gap: 5px;
+  padding: 12px;
+  border-radius: 14px;
+}
+
+.mode-normal .insight-stat-card span,
+.mode-normal .wrong-book-stat-card span,
+.mode-normal .wrong-book-summary-item span,
+.mode-normal .feedback-analysis-item small,
+.mode-normal .learning-progress-card span,
+.mode-normal .account-info-row span,
+.mode-normal .account-input-field span {
+  font-size: 11px;
+}
+
+.mode-normal .insight-stat-card strong,
+.mode-normal .wrong-book-stat-card strong,
+.mode-normal .wrong-book-summary-item strong,
+.mode-normal .feedback-analysis-item strong,
+.mode-normal .learning-progress-card strong,
+.mode-normal .account-info-row strong {
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.mode-normal .insight-section-head strong,
+.mode-normal .wrong-book-section-head strong,
+.mode-normal .account-section-head strong,
+.mode-normal .feedback-stat-head strong,
+.mode-normal .photo-section-head strong,
+.mode-normal .photo-card-heading strong {
+  font-size: 17px;
+}
+
+.mode-normal .insight-section-head span,
+.mode-normal .wrong-book-section-head span,
+.mode-normal .account-section-head span,
+.mode-normal .feedback-stat-head span,
+.mode-normal .photo-section-head span,
+.mode-normal .photo-card-heading span {
+  font-size: 11px;
+}
+
+.mode-normal .insight-item-card,
+.mode-normal .insight-scene-card,
+.mode-normal .teacher-feedback-card,
+.mode-normal .wrong-book-item-card,
+.mode-normal .wrong-book-detail-card,
+.mode-normal .progress-growth-card,
+.mode-normal .progress-compare-card,
+.mode-normal .profile-menu-card,
+.mode-normal .account-feature-card,
+.mode-normal .study-survey-field-card,
+.mode-normal .photo-question-card,
+.mode-normal .feedback-step-item,
+.mode-normal .feedback-mastered-highlight,
+.mode-normal .feedback-summary-item {
+  gap: 10px;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.mode-normal .profile-guardian-row {
+  grid-template-columns: 46px minmax(0, 1fr);
+}
+
+.mode-normal .profile-child-avatar,
+.mode-normal .profile-child-avatar.child {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  font-size: 18px;
+}
+
+.mode-normal .profile-guardian-row strong {
+  font-size: 20px;
+}
+
+.mode-normal .bound-child-card {
+  min-height: 72px;
+  grid-template-columns: 46px minmax(0, 1fr) 20px;
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.mode-normal .profile-menu-card {
+  min-height: 68px;
+  grid-template-columns: 42px minmax(0, 1fr) 20px;
+}
+
+.mode-normal .profile-menu-icon,
+.mode-normal .progress-growth-badge,
+.mode-normal .account-feature-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+}
+
+.mode-normal .profile-menu-copy strong,
+.mode-normal .insight-scene-card strong,
+.mode-normal .teacher-feedback-head strong,
+.mode-normal .wrong-book-item-head strong,
+.mode-normal .wrong-book-detail-head strong,
+.mode-normal .progress-growth-head strong,
+.mode-normal .progress-compare-card strong,
+.mode-normal .account-feature-card strong,
+.mode-normal .study-survey-field-head strong,
+.mode-normal .photo-question-topline strong {
+  font-size: 16px;
+}
+
+.mode-normal .profile-menu-copy small,
+.mode-normal .insight-scene-card p,
+.mode-normal .teacher-feedback-card p,
+.mode-normal .wrong-book-item-main p,
+.mode-normal .wrong-book-detail-reason p,
+.mode-normal .profile-note-card strong,
+.mode-normal .insight-note-card strong,
+.mode-normal .learning-progress-card p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.mode-normal .account-switch-row,
+.mode-normal .binding-status-strip,
+.mode-normal .account-save-strip {
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+
+.mode-normal .account-switch-row b {
+  min-width: 38px;
+  height: 26px;
+  font-size: 12px;
+}
+
+.mode-normal .account-segment-grid {
+  gap: 8px;
+}
+
+.mode-normal .account-segment-grid button {
+  min-height: 48px;
+  border-radius: 14px;
+  font-size: 12px;
+}
+
+.mode-normal .account-input-field input {
+  min-height: 44px;
+  border-radius: 13px;
+  font-size: 15px;
+}
+
+.mode-normal .account-confirm-actions button,
+.mode-normal .account-secondary-button,
+.mode-normal .account-text-button {
+  min-height: 44px;
+  border-radius: 13px;
+  font-size: 14px;
+}
+
+.mode-normal .settings-preview {
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+.mode-normal .settings-preview.is-large {
+  font-size: 16px;
+}
+
+.mode-normal .settings-preview.is-extra-large {
+  font-size: 18px;
+}
+
+.mode-normal .study-survey-choice-grid {
+  gap: 8px;
+}
+
+.mode-normal .study-survey-choice {
+  min-height: 74px;
+  gap: 5px;
+  padding: 11px;
+  border-radius: 14px;
+}
+
+.mode-normal .study-survey-choice strong {
+  font-size: 14px;
+}
+
+.mode-normal .study-survey-choice small {
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.mode-normal .study-survey-note-field textarea {
+  min-height: 88px;
+  padding: 12px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+
+.mode-normal .wrong-book-item-card {
+  grid-template-columns: 34px minmax(0, 1fr);
+}
+
+.mode-normal .wrong-book-item-rank b,
+.mode-normal .insight-item-rank b {
+  width: 34px;
+  height: 34px;
+  font-size: 15px;
+}
+
+.mode-normal .wrong-book-item-link,
+.mode-normal .learning-scene-link {
+  font-size: 12px;
+}
+
+.mode-normal .question-flow-content {
+  padding-top: 12px;
+}
+
+.mode-normal .question-flow-content .progress-track {
+  height: 8px;
+}
+
+.mode-normal .question-flow-content .question-area {
+  min-height: 170px;
+  padding: 18px;
+  border-radius: 22px;
+}
+
+.mode-normal .question-flow-content .question-hint {
+  font-size: 14px;
+}
+
+.mode-normal .question-flow-content .math-expression {
+  font-size: 40px;
+}
+
+.mode-normal .question-flow-content .math-expression.math-expression-long {
+  font-size: 26px;
+}
+
+.mode-normal .question-flow-content .answer-list {
+  gap: 9px;
+}
+
+.mode-normal .question-flow-content .answer-list button {
+  min-height: 54px;
+  border-radius: 16px;
+  font-size: 21px;
+}
+
+.mode-normal .review-paper-content .review-paper-rule {
+  padding: 11px 12px;
+  border-radius: 16px;
+}
+
+.mode-normal .review-paper-content .review-paper-rule strong {
+  font-size: 16px;
+}
+
+.mode-normal .review-paper-content .review-paper-rule span {
+  font-size: 13px;
+}
+
+.mode-normal .review-paper-actions {
+  gap: 8px;
+}
+
+.mode-normal .review-result-content,
+.mode-normal .review-knowledge-content {
+  gap: 10px;
+}
+
+.mode-normal .review-score-board,
+.mode-normal .review-question-list,
+.mode-normal .review-weak-list,
+.mode-normal .review-mistake-list {
+  gap: 8px;
+}
+
+.mode-normal .review-score-board > div,
+.mode-normal .review-question-item,
+.mode-normal .review-weak-item {
+  padding: 11px 12px;
+  border-radius: 16px;
+}
+
+.mode-normal .review-score-board strong {
+  font-size: 22px;
+}
+
+.mode-normal .review-question-item {
+  grid-template-columns: 30px minmax(0, 1fr);
+}
+
+.mode-normal .review-question-item b {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+.mode-normal .review-question-item strong,
+.mode-normal .review-weak-item strong {
+  font-size: 15px;
+}
+
+.mode-normal .review-question-item span,
+.mode-normal .review-question-item small,
+.mode-normal .review-weak-item small {
+  font-size: 12px;
+}
+
+.mode-normal .review-weak-item p,
+.mode-normal .review-family-card p,
+.mode-normal .review-mistake-list span {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.mode-normal .review-mistake-list span {
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+
+.mode-normal .feedback-hero-card .result-mark {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+}
+
+.mode-normal .feedback-data-hero {
+  gap: 8px;
+}
+
+.mode-normal .feedback-data-hero-main,
+.mode-normal .feedback-data-hero-side {
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.mode-normal .feedback-data-hero-main strong {
+  font-size: 32px;
+}
+
+.mode-normal .feedback-keyline {
+  padding: 12px;
+  border-radius: 16px;
+  font-size: 18px;
+}
+
+.mode-normal .feedback-step-item {
+  grid-template-columns: 28px minmax(0, 1fr);
+}
+
+.mode-normal .feedback-step-item b {
+  width: 28px;
+  height: 28px;
+  font-size: 13px;
+}
+
+.mode-normal .feedback-step-item span {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.mode-normal .photo-stage-switcher,
+.mode-normal .photo-question-list,
+.mode-normal .photo-check-points {
+  gap: 8px;
+}
+
+.mode-normal .photo-stage-pill {
+  min-height: 62px;
+  padding: 10px;
+  border-radius: 16px;
+}
+
+.mode-normal .photo-stage-pill strong,
+.mode-normal .photo-question-card h4,
+.mode-normal .photo-analysis-highlight strong,
+.mode-normal .photo-analysis-success strong {
+  font-size: 16px;
+}
+
+.mode-normal .photo-scene-stage {
+  min-height: 250px;
+  border-radius: 20px;
+}
+
+.mode-normal .photo-scene-paper {
+  width: 210px;
+  min-height: 170px;
+}
+
+.mode-normal .progress-keyline,
+.mode-normal .progress-focus-banner,
+.mode-normal .feedback-progress-panel {
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.mode-normal .progress-stat-card strong {
+  font-size: 18px;
+}
+
+.mode-normal .progress-tip-item {
+  grid-template-columns: 26px minmax(0, 1fr);
+  padding: 11px 12px;
+  border-radius: 14px;
+}
+
+.mode-normal .progress-tip-item b {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+}
+
+.mode-normal .progress-tip-item span {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+@media (max-width: 360px) {
+  .mode-normal .home-shortcut-grid,
+  .mode-normal .insight-stat-grid,
+  .mode-normal .learning-progress-grid,
+  .mode-normal .study-survey-choice-grid,
+  .mode-normal .feedback-analysis-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mode-normal .insight-hero-top,
+  .mode-normal .account-hero-top,
+  .mode-normal .wrong-book-hero-top,
+  .mode-normal .feedback-hero-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mode-normal .insight-hero-icon,
+  .mode-normal .account-hero-icon,
+  .mode-normal .wrong-book-hero-icon {
+    justify-self: start;
+  }
+
+  .mode-normal .question-flow-content .math-expression {
+    font-size: 34px;
+  }
+}

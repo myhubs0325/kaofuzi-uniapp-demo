@@ -1,0 +1,16 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "考夫子教评助手"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "考夫子教评助手",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F4F7F5"
+  }
+}

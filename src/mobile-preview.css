@@ -1,0 +1,40 @@
+/* Keep the browser's explicit mobile mode visually equivalent to a narrow device viewport. */
+@media (min-width: 981px) {
+  .uni-demo-layout {
+    grid-template-columns: 414px !important;
+    padding: 24px !important;
+  }
+
+  .uni-demo-layout > .uni-demo-device {
+    width: 100% !important;
+    display: grid !important;
+    justify-items: center !important;
+  }
+
+  .uni-demo-layout .phone-app.standalone {
+    width: 414px !important;
+    max-width: 414px !important;
+    height: 896px !important;
+    min-height: 896px !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+    border-radius: 34px !important;
+  }
+
+  /* The original mobile home layout is single-column at phone width. */
+  .uni-demo-layout .home-dashboard-content {
+    padding: 14px 16px 92px !important;
+  }
+
+  .uni-demo-layout .home-dashboard-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .uni-demo-layout .home-panel-task,
+  .uni-demo-layout .home-panel-actions,
+  .uni-demo-layout .home-panel-stats {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}

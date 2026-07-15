@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+  <title id="title">考夫子极简品牌图标样本</title>
+  <desc id="desc">黑色线稿和主题蓝点缀的十个极简图标</desc>
+  <defs>
+    <linearGradient id="blueGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f7cf6"/>
+      <stop offset="1" stop-color="#72a9ff"/>
+    </linearGradient>
+    <style>
+      .i { fill: none; stroke: #3f4650; stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .b { fill: none; stroke: url(#blueGradient); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+      .dot { fill: url(#blueGradient); }
+      .label { fill: #343a43; font-family: "Microsoft YaHei", sans-serif; font-size: 19px; font-weight: 600; text-anchor: middle; }
+    </style>
+    <symbol id="home" viewBox="0 0 64 64">
+      <path d="M10 30 L32 12 L54 30 V53 H10Z" class="i"/>
+      <path d="M23 53 V39 Q32 34 41 39 V53" class="i"/><rect x="27" y="41" width="10" height="7" rx="3" class="b"/>
+    </symbol>
+    <symbol id="insight" viewBox="0 0 64 64">
+      <path d="M10 52 H54 M14 46 V34 M25 46 V25 M36 46 V38 M47 46 V16" class="i"/>
+      <path d="M14 21 L25 28 L36 19 L47 12" class="b"/><path d="M39 12 H55 M47 12 V20" class="i"/><circle cx="47" cy="12" r="3" class="dot"/>
+    </symbol>
+    <symbol id="study" viewBox="0 0 64 64">
+      <path d="M32 18 Q21 13 10 18 V51 Q21 46 32 52 Q43 46 54 51 V18 Q43 13 32 18Z" class="i"/>
+      <path d="M32 18 V52" class="b"/><path d="M32 28 L38 32 L36 40 L32 44 L28 40 L26 32Z" class="b"/>
+    </symbol>
+    <symbol id="profile" viewBox="0 0 64 64">
+      <rect x="14" y="14" width="36" height="28" rx="10" class="i"/><rect x="21" y="21" width="22" height="14" rx="5" class="b"/>
+      <circle cx="27" cy="27" r="2" class="dot"/><circle cx="37" cy="27" r="2" class="dot"/><path d="M28 32 Q32 35 36 32" class="b"/>
+      <path d="M32 14 V7 M28 10 H36" class="i"/><path d="M18 52 Q32 43 46 52" class="i"/>
+    </symbol>
+    <symbol id="wrong" viewBox="0 0 64 64">
+      <path d="M14 12 H50 V54 H14Z" class="i"/><path d="M14 20 H50 M23 12 V8 H41 V12" class="i"/>
+      <path d="M32 28 L38 32 L36 40 L32 44 L28 40 L26 32Z" class="b"/><path d="M29 36 H35" class="b"/>
+    </symbol>
+    <symbol id="camera" viewBox="0 0 64 64">
+      <path d="M10 22 H22 L27 16 H37 L42 22 H54 V52 H10Z" class="i"/>
+      <path d="M32 25 L40 30 L38 41 L32 47 L26 41 L24 30Z" class="b"/><circle cx="32" cy="36" r="3" class="dot"/>
+    </symbol>
+    <symbol id="calendar" viewBox="0 0 64 64">
+      <rect x="11" y="14" width="42" height="40" rx="5" class="i"/><path d="M11 27 H53 M21 9 V19 M43 9 V19" class="i"/>
+      <path d="M21 9 H43 M43 9 V19" class="i"/><path d="M32 34 V48 M25 41 H39" class="b"/><path d="M46 19 V28" class="i"/>
+    </symbol>
+    <symbol id="report" viewBox="0 0 64 64">
+      <path d="M10 51 H54 M14 44 L25 34 L34 39 L50 20" class="i"/>
+      <path d="M50 15 L55 19 L53 25 L50 28 L47 25 L45 19Z" class="b"/>
+    </symbol>
+    <symbol id="feedback" viewBox="0 0 64 64">
+      <path d="M10 14 H54 V45 H31 L20 54 V45 H10Z" class="i"/>
+      <rect x="24" y="23" width="16" height="12" rx="4" class="b"/><circle cx="29" cy="29" r="2" class="dot"/><circle cx="35" cy="29" r="2" class="dot"/>
+    </symbol>
+    <symbol id="binding" viewBox="0 0 64 64">
+      <path d="M26 39 L21 44 Q14 51 9 46 Q4 41 11 34 L20 25 Q27 18 34 25" class="i"/>
+      <path d="M38 25 L43 20 Q50 13 55 18 Q60 23 53 30 L44 39 Q37 46 30 39" class="i"/>
+      <path d="M22 32 H42" class="b"/><circle cx="22" cy="32" r="3" class="dot"/><circle cx="42" cy="32" r="3" class="dot"/>
+    </symbol>
+  </defs>
+
+  <rect width="1120" height="620" fill="#ffffff"/>
+  <text x="48" y="52" fill="#343a43" font-family="Microsoft YaHei, sans-serif" font-size="27" font-weight="700">考夫子品牌图标样本</text>
+  <text x="48" y="79" fill="#8b9098" font-family="Microsoft YaHei, sans-serif" font-size="15">极简线性版 · 黑色主线 · 主题蓝点缀 · logo 元素只保留识别符号</text>
+  <path d="M48 102 H1072" stroke="#e6e8eb"/>
+
+  <g transform="translate(48 130)"><use href="#home" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">首页</text></g>
+  <g transform="translate(256 130)"><use href="#insight" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">学情</text></g>
+  <g transform="translate(464 130)"><use href="#study" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">学习</text></g>
+  <g transform="translate(672 130)"><use href="#profile" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">我的</text></g>
+  <g transform="translate(880 130)"><use href="#wrong" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">错题本</text></g>
+
+  <g transform="translate(48 370)"><use href="#camera" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">拍照检查</text></g>
+  <g transform="translate(256 370)"><use href="#calendar" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">考前冲刺</text></g>
+  <g transform="translate(464 370)"><use href="#report" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">学习报告</text></g>
+  <g transform="translate(672 370)"><use href="#feedback" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">老师反馈</text></g>
+  <g transform="translate(880 370)"><use href="#binding" x="48" y="0" width="64" height="64"/><text x="80" y="105" class="label">家校绑定</text></g>
+
+  <path d="M48 555 H1072" stroke="#e6e8eb"/>
+  <text x="48" y="584" fill="#8b9098" font-family="Microsoft YaHei, sans-serif" font-size="14">建议基准：24 px 导航 / 32 px 功能入口 / 48 px 页面标题图标</text>
+</svg>
