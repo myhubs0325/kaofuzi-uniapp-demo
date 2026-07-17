@@ -22,7 +22,7 @@
       v-if="showProfileButton"
       type="button"
       class="profile-button"
-      aria-label="数据与隐私"
+      aria-label="账号与数据"
       @click="openDataPrivacy?.()"
     >
       <UserRound :size="20" />

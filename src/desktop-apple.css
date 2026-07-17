@@ -33,7 +33,7 @@
 
   .desktop-workspace .pc-exam-prep-feature .pc-exam-priority-0 b { color: #ff3b30 !important; }
   .desktop-workspace .pc-exam-prep-feature .pc-exam-priority-1 {
-    border-left: 4px solid #ff9f0a !important;
+    border-left: 4px solid #72aef2 !important;
     background: linear-gradient(135deg, #fff9ed, #fff) !important;
   }
 
@@ -237,6 +237,114 @@
   .desktop-workspace .pc-setting-group,
   .desktop-workspace .pc-detail-row {
     background: linear-gradient(135deg, #f7fbff, #edf6ff) !important;
+  }
+}
+
+/* Compact desktop header: brand on the left, lightweight status actions on the right. */
+.desktop-notification-button { display: none; }
+
+@media (min-width: 821px) {
+  .desktop-brand {
+    grid-template-columns: 48px minmax(0, 1fr) !important;
+    column-gap: 12px !important;
+    align-items: center !important;
+  }
+
+  .desktop-brand::before {
+    content: "" !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
+    background-color: transparent !important;
+    background-image: url("/logo2.png") !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+    box-shadow: none !important;
+  }
+
+  .desktop-brand-kicker,
+  .desktop-brand small { display: none !important; }
+  .desktop-brand strong {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--apple-ink) !important;
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap;
+  }
+
+  .desktop-global-tools { gap: 12px !important; }
+
+  .desktop-notification-button {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 12px;
+    color: #52708f;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .desktop-notification-button:hover { color: #0066d6; background: #eaf3ff; }
+  .desktop-notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 1px;
+    min-width: 15px;
+    height: 15px;
+    display: grid;
+    place-items: center;
+    padding: 0 3px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    color: #fff;
+    background: #ff3b30;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .desktop-student-chip {
+    min-width: 0 !important;
+    padding: 5px 0 5px 5px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .desktop-student-chip:hover { background: #eaf3ff !important; }
+  .desktop-student-chip > span:last-child { display: flex; align-items: center; gap: 6px; }
+  .desktop-student-chip > span:last-child strong,
+  .desktop-student-chip > span:last-child small {
+    display: inline !important;
+    margin: 0 !important;
+    white-space: nowrap;
+  }
+  .desktop-student-chip > span:last-child strong { order: 2; color: #1d1d1f !important; font-size: 13px !important; }
+  .desktop-student-chip > span:last-child small { order: 1; color: #617b96 !important; font-size: 13px !important; }
+  .desktop-student-avatar {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+  }
+
+  .desktop-global-tools .desktop-topbar-elder {
+    width: auto;
+    min-width: 78px;
+    min-height: 34px !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(60, 60, 67, 0.12) !important;
+    border-radius: 999px !important;
+    color: #68788a !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    white-space: nowrap;
   }
 }
 
@@ -1133,6 +1241,13 @@
     margin-top: 12px;
   }
 
+  .desktop-workspace .pc-layout-2 > .pc-main-card > .pc-profile-edit-button {
+    width: 112px !important;
+    min-width: 112px;
+    max-width: 112px;
+    justify-self: start;
+  }
+
   .desktop-workspace .pc-layout-2 > .pc-main-card > .pc-primary + .pc-save-note,
   .desktop-workspace .pc-layout-2 > .pc-main-card > .pc-secondary + .pc-save-note {
     vertical-align: middle;
@@ -1188,6 +1303,15 @@
     width: max-content !important;
     min-width: 132px;
     margin-top: 28px;
+  }
+
+  .desktop-workspace .pc-layout-2 > .pc-main-card > .pc-profile-edit-button,
+  .desktop-workspace .pc-layout-2 > .pc-main-card > .pc-profile-edit-button:last-child {
+    width: 112px !important;
+    min-width: 112px;
+    max-width: 112px;
+    margin-top: 12px;
+    justify-self: start;
   }
 
   /* Shared button baseline for every PC action variant, including modal danger actions. */
@@ -1447,7 +1571,7 @@
 
   .desktop-workspace .desktop-rail {
     position: fixed !important;
-    top: 96px;
+    top: 128px;
     bottom: 24px;
     left: max(24px, calc((100vw - 1280px) / 2));
     z-index: 30;
@@ -1467,39 +1591,48 @@
 
   /* Last override wins over the historical fixed-shell rules above. */
   .desktop-workspace {
-    grid-template-columns: 248px minmax(0, 1fr) !important;
-    gap: 12px !important;
+    grid-template-columns: 200px minmax(0, 1fr) !important;
+    gap: 24px !important;
   }
 
   .desktop-workspace .desktop-rail {
-    width: 248px !important;
+    width: 200px !important;
   }
 
   .desktop-workspace .desktop-primary-nav {
-    width: 248px !important;
-    gap: 10px !important;
+    width: 200px !important;
+    gap: 8px !important;
   }
 
   .desktop-workspace .desktop-feature-nav {
-    width: 248px !important;
+    width: 200px !important;
     display: grid;
-    gap: 10px;
-    margin-top: 14px;
-    padding-top: 14px;
+    gap: 8px;
+    margin-top: 11px;
+    padding-top: 11px;
     border-top: 1px solid rgba(60, 60, 67, 0.1);
   }
 
   .desktop-workspace .desktop-feature-nav .desktop-nav-button {
-    width: 248px !important;
+    width: 200px !important;
   }
 
   .desktop-workspace .desktop-primary-nav::before { display: none !important; }
 
   .desktop-workspace .desktop-nav-button {
-    width: 248px !important;
-    min-height: 68px !important;
-    padding: 0 20px !important;
-    font-size: 16px !important;
+    width: 200px !important;
+    min-height: 54px !important;
+    padding: 0 16px !important;
+    gap: 12px !important;
+    border-radius: 15px !important;
+    font-size: 13px !important;
+  }
+
+  .desktop-workspace .desktop-nav-button svg {
+    width: 18px !important;
+    height: 18px !important;
+    padding: 5px !important;
+    border-radius: 10px !important;
   }
 
   .desktop-workspace .pc-scene-grid {
@@ -1776,13 +1909,13 @@
   .desktop-workspace .pc-main-card:has(.pc-detail-list) .pc-detail-row {
     min-height: 82px;
     border: 1px solid rgba(0, 122, 255, 0.12) !important;
-    border-left: 4px solid #ff9f0a !important;
+    border-left: 4px solid var(--pc-blue) !important;
     border-radius: 17px !important;
-    background: linear-gradient(135deg, #fffaf0, #fff) !important;
+    background: linear-gradient(135deg, #f5faff, #e6f2ff) !important;
   }
 
   .desktop-workspace .pc-main-card:has(.pc-detail-list) .pc-detail-row > span {
-    color: #d97706 !important;
+    color: #2d6fad !important;
     font-weight: 750;
   }
 
@@ -1863,5 +1996,450 @@
   @keyframes pc-ai-orbit {
     from { transform: rotate(0deg) scaleX(1); }
     to { transform: rotate(360deg) scaleX(1); }
+  }
+
+  .desktop-workspace .pc-preview-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 122, 255, 0.12);
+  }
+
+  .desktop-workspace .pc-preview-pagination > span {
+    color: #66809c;
+    font-size: 12px;
+    font-weight: 750;
+  }
+
+  .desktop-workspace .pc-preview-pagination > div {
+    display: flex;
+    gap: 7px;
+  }
+
+  .desktop-workspace .pc-preview-page-button {
+    min-height: 30px;
+    padding: 0 11px;
+    border: 1px solid rgba(0, 122, 255, 0.16);
+    border-radius: 9px;
+    color: #1769c2;
+    background: rgba(255, 255, 255, 0.8);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .desktop-workspace .pc-preview-page-button:disabled {
+    color: #aebdcb;
+    background: #f3f6f9;
+    cursor: not-allowed;
+  }
+
+  .desktop-workspace .pc-text-ppt-preview-wrap { display: grid; }
+  .desktop-workspace .pc-text-ppt-preview {
+    max-height: none !important;
+    min-height: 194px;
+    overflow: hidden !important;
+  }
+
+  .desktop-workspace .pc-wrong-detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(250px, 0.7fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .desktop-workspace .pc-wrong-detail-main {
+    min-width: 0;
+    padding: 26px;
+  }
+
+  .desktop-workspace .pc-wrong-detail-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 122, 255, 0.12);
+  }
+
+  .desktop-workspace .pc-wrong-detail-heading h2 { margin: 7px 0 8px; font-size: 28px; }
+  .desktop-workspace .pc-wrong-detail-heading p { max-width: 680px; margin: 0; color: #687c94; line-height: 1.65; }
+  .desktop-workspace .pc-wrong-detail-count {
+    flex: 0 0 auto;
+    padding: 8px 11px;
+    border-radius: 999px;
+    color: #1769c2;
+    background: #eaf4ff;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .desktop-workspace .pc-wrong-question-list { display: grid; gap: 16px; margin-top: 20px; }
+  .desktop-workspace .pc-wrong-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 122, 255, 0.12);
+  }
+  .desktop-workspace .pc-wrong-pagination > span { color: #66809c; font-size: 12px; font-weight: 750; }
+  .desktop-workspace .pc-wrong-pagination > div { display: flex; gap: 7px; }
+  .desktop-workspace .pc-wrong-question-card {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid rgba(0, 122, 255, 0.14);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #f8fbff, #edf6ff);
+  }
+
+  .desktop-workspace .pc-wrong-question-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: #1769c2;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .desktop-workspace .pc-wrong-question-meta small { color: #7d8fa3; font-weight: 600; }
+  .desktop-workspace .pc-wrong-question-card h3 { margin: 12px 0 16px; color: #16283e; font-size: 22px; line-height: 1.4; }
+  .desktop-workspace .pc-answer-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .desktop-workspace .pc-answer-cell { display: grid; gap: 5px; padding: 13px 15px; border-radius: 14px; }
+  .desktop-workspace .pc-answer-cell small { font-size: 11px; font-weight: 750; }
+  .desktop-workspace .pc-answer-cell strong { font-size: 20px; }
+  .desktop-workspace .pc-answer-cell-wrong { color: #d82f2f; background: linear-gradient(135deg, #fff2f1, #ffe9e7); }
+  .desktop-workspace .pc-answer-cell-correct { color: #16834b; background: linear-gradient(135deg, #effcf5, #e1f8eb); }
+  .desktop-workspace .pc-explanation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+  .desktop-workspace .pc-explanation-block { padding: 13px 15px; border-radius: 14px; background: rgba(255, 255, 255, 0.78); }
+  .desktop-workspace .pc-explanation-block span { color: #1769c2; font-size: 12px; font-weight: 800; }
+  .desktop-workspace .pc-explanation-block p { margin: 7px 0 0; color: #506a85; font-size: 13px; line-height: 1.65; }
+  .desktop-workspace .pc-explanation-method { background: linear-gradient(135deg, #f2f8ff, #e5f2ff); }
+  .desktop-workspace .pc-explanation-steps { margin-top: 12px; padding: 14px 16px; border-radius: 14px; background: rgba(255, 255, 255, 0.72); }
+  .desktop-workspace .pc-explanation-steps > span { color: #1769c2; font-size: 12px; font-weight: 800; }
+  .desktop-workspace .pc-explanation-steps ol { display: grid; gap: 6px; margin: 8px 0 0; padding-left: 20px; color: #506a85; font-size: 13px; line-height: 1.55; }
+  .desktop-workspace .pc-practice-board,
+  .desktop-workspace .pc-main-card:has(> .pc-review-list) { position: relative; }
+  .desktop-workspace .pc-practice-board > .pc-card-title,
+  .desktop-workspace .pc-main-card:has(> .pc-review-list) > .pc-card-title { padding-right: 210px; }
+  .desktop-workspace .pc-practice-board > .pc-test-tools,
+  .desktop-workspace .pc-main-card:has(> .pc-review-list) > .pc-test-tools {
+    position: absolute;
+    top: 24px;
+    right: 26px;
+    z-index: 2;
+    justify-content: flex-end;
+    margin: 0;
+  }
+  .desktop-workspace .pc-practice-board > .pc-test-tools,
+  .desktop-workspace .pc-main-card:has(> .pc-review-list) > .pc-test-tools {
+    position: static;
+    justify-content: flex-end;
+    margin: 12px 0 8px;
+  }
+  .desktop-workspace .pc-practice-board > .pc-card-title,
+  .desktop-workspace .pc-main-card:has(> .pc-review-list) > .pc-card-title { padding-right: 0; }
+  .desktop-workspace .pc-practice-layout { align-items: stretch; }
+  .desktop-workspace .pc-practice-layout .pc-practice-board {
+    min-height: 0;
+    padding: 20px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-card-title { margin-bottom: 0; }
+  .desktop-workspace .pc-practice-layout .pc-practice-toolbar {
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-test-tools {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+  .desktop-workspace .pc-practice-layout .pc-progress-label { margin: 0; }
+  .desktop-workspace .pc-practice-layout .pc-question-board {
+    min-height: 190px;
+    padding: 18px 20px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-question-board strong { font-size: 30px; }
+  .desktop-workspace .pc-practice-layout .pc-question-board p { margin-bottom: 10px; }
+  .desktop-workspace .pc-practice-layout .pc-answer-grid { margin-top: 12px; gap: 8px; }
+  .desktop-workspace .pc-practice-layout .pc-answer-grid button { min-height: 44px; }
+  .desktop-workspace .pc-practice-summary { min-height: 0; padding: 18px; }
+  .desktop-workspace .pc-practice-summary .pc-practice-stat-grid { margin: 12px 0 8px; }
+  .desktop-workspace .pc-practice-summary .pc-practice-stat-grid > div,
+  .desktop-workspace .pc-practice-summary .pc-practice-focus { padding: 10px 11px; }
+  .desktop-workspace .pc-practice-summary .pc-preview-list { gap: 7px; margin: 10px 0 0; }
+  .desktop-workspace .pc-practice-summary .pc-preview-list > div { padding: 9px 10px; }
+  .desktop-workspace .pc-review-option-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 14px; }
+  .desktop-workspace .pc-review-option-grid .pc-option { min-height: 54px; text-align: center; font-size: 16px; }
+  .desktop-workspace .pc-review-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(0, 122, 255, 0.12);
+  }
+  .desktop-workspace .pc-review-pagination > span { color: #66809c; font-size: 12px; font-weight: 750; }
+  .desktop-workspace .pc-review-pagination > div { display: flex; align-items: center; gap: 7px; }
+  .desktop-workspace .pc-review-submit-button { min-height: 36px; padding: 0 14px; }
+
+  /* Practice screens only: give the question room to breathe without changing other pages. */
+  .desktop-workspace .pc-practice-layout {
+    gap: 20px;
+    align-items: start;
+  }
+  .desktop-workspace .pc-practice-layout .pc-practice-board {
+    padding: 24px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-practice-summary {
+    padding: 22px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-card-title { margin-bottom: 4px; }
+  .desktop-workspace .pc-practice-layout .pc-practice-toolbar {
+    gap: 14px;
+    margin: 14px 0 16px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-test-tools {
+    gap: 10px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-test-tools .pc-secondary {
+    min-height: 38px;
+    padding: 0 13px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-question-board {
+    min-height: 270px;
+    padding: 28px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #f7fbff 0%, #edf6ff 100%);
+  }
+  .desktop-workspace .pc-practice-layout .pc-question-board p {
+    margin-bottom: 18px;
+    font-size: 14px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-question-board strong { font-size: 36px; }
+  .desktop-workspace .pc-practice-layout .pc-answer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-answer-grid button {
+    min-height: 56px;
+    font-size: 15px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-practice-summary .pc-practice-stat-grid {
+    gap: 10px;
+    margin: 16px 0 12px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-practice-summary .pc-practice-stat-grid > div,
+  .desktop-workspace .pc-practice-layout .pc-practice-summary .pc-practice-focus { padding: 12px; }
+  .desktop-workspace .pc-practice-layout .pc-practice-summary .pc-preview-list {
+    gap: 9px;
+    margin-top: 14px;
+  }
+  .desktop-workspace .pc-practice-layout .pc-practice-summary .pc-preview-list > div { padding: 11px 12px; }
+
+  /* Photo recognition step 2 uses the same shell as step 1; only the visual state changes. */
+  .desktop-workspace .pc-photo-layout .pc-upload-board:has(.pc-ai-orb) {
+    display: block !important;
+    min-height: 430px !important;
+    text-align: left !important;
+    align-content: initial !important;
+    justify-items: initial !important;
+  }
+  .desktop-workspace .pc-photo-layout .pc-upload-board:has(.pc-ai-orb) .pc-upload-visual {
+    min-height: 330px !important;
+    display: grid !important;
+    place-items: center !important;
+    align-content: center !important;
+    text-align: center !important;
+  }
+
+  .desktop-workspace .pc-wrong-detail-aside { display: grid; gap: 14px; position: sticky; top: 118px; }
+  .desktop-workspace .pc-wrong-focus-card { display: grid; gap: 13px; }
+  .desktop-workspace .pc-wrong-focus-card h3 { margin: 0; color: #1d1d1f; font-size: 18px; line-height: 1.5; }
+  .desktop-workspace .pc-wrong-focus-line { display: flex; flex-wrap: wrap; gap: 8px; color: #63809e; font-size: 12px; }
+  .desktop-workspace .pc-wrong-focus-line span { padding: 7px 9px; border-radius: 9px; background: #edf6ff; }
+
+  /* Header finish: these rules intentionally come after the legacy shell overrides. */
+  .desktop-brand { grid-template-columns: 48px minmax(0, 1fr) !important; column-gap: 12px !important; }
+  .desktop-brand::before {
+    content: "" !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 14px !important;
+    background: transparent url("/logo2.png") center / contain no-repeat !important;
+    box-shadow: none !important;
+  }
+  .desktop-brand-kicker,
+  .desktop-brand small { display: none !important; }
+  .desktop-brand strong {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--apple-ink) !important;
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap;
+  }
+  .desktop-global-tools { gap: 12px !important; }
+  .desktop-notification-button {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 12px;
+    color: #52708f;
+    background: transparent;
+    cursor: pointer;
+  }
+  .desktop-notification-button:hover { color: #0066d6; background: #eaf3ff; }
+  .desktop-notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 1px;
+    min-width: 15px;
+    height: 15px;
+    display: grid;
+    place-items: center;
+    padding: 0 3px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    color: #fff;
+    background: #ff3b30;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .desktop-student-chip {
+    min-width: 0 !important;
+    padding: 5px 0 5px 5px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  .desktop-student-chip:hover { background: #eaf3ff !important; }
+  .desktop-student-chip > span:last-child { display: flex; align-items: center; gap: 6px; }
+  .desktop-student-chip > span:last-child strong,
+  .desktop-student-chip > span:last-child small { display: inline !important; margin: 0 !important; white-space: nowrap; }
+  .desktop-student-chip > span:last-child strong { order: 2; color: #1d1d1f !important; font-size: 13px !important; }
+  .desktop-student-chip > span:last-child small { order: 1; color: #617b96 !important; font-size: 13px !important; }
+  .desktop-student-avatar { width: 30px !important; height: 30px !important; border-radius: 10px !important; font-size: 12px !important; }
+  .desktop-child-selector { position: relative; }
+  .desktop-child-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 80;
+    width: 260px;
+    padding: 12px;
+    border: 1px solid rgba(171, 190, 218, 0.32);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 18px 42px rgba(52, 69, 98, 0.16);
+    backdrop-filter: blur(24px) saturate(1.15);
+  }
+  .desktop-child-option,
+  .desktop-child-manage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 0;
+    border-radius: 11px;
+    color: #304b68;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+  }
+  .desktop-child-option:hover,
+  .desktop-child-option.active { background: #eaf3ff; }
+  .desktop-child-option > span:nth-child(2) { flex: 1; min-width: 0; }
+  .desktop-child-option strong,
+  .desktop-child-option small { display: block; white-space: nowrap; }
+  .desktop-child-option small { margin-top: 3px; color: #7890a8; font-size: 11px; }
+  .desktop-child-option-avatar {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(145deg, #73b8ff, #007aff);
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .desktop-child-check { color: #007aff; font-weight: 800; }
+  .desktop-child-manage {
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 11px 10px 5px;
+    border-top: 1px solid rgba(60, 60, 67, 0.1);
+    border-radius: 0;
+    color: #007aff;
+    font-weight: 750;
+  }
+  .desktop-child-manage:hover { background: #f4f8fd; }
+
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-form-grid input) {
+    display: flex;
+    flex-direction: column;
+    min-height: 470px;
+  }
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-form-grid input) > .pc-tint-note {
+    margin-top: auto;
+    margin-bottom: 0;
+    padding: 5px 0 0;
+    border: 0;
+    color: #8a98a8;
+    background: transparent;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-form-grid input) > .pc-tint-note::before {
+    content: "* ";
+    color: #8a98a8;
+  }
+  .desktop-global-tools .desktop-topbar-elder {
+    width: auto;
+    min-width: 78px;
+    min-height: 34px !important;
+    padding: 0 10px !important;
+    border: 1px solid rgba(60, 60, 67, 0.12) !important;
+    border-radius: 999px !important;
+    color: #68788a !important;
+    background: rgba(255, 255, 255, 0.72) !important;
+    font-size: 11px !important;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1080px) {
+    .desktop-workspace .pc-wrong-detail-layout { grid-template-columns: 1fr; }
+    .desktop-workspace .pc-wrong-detail-aside { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 720px) {
+    .desktop-workspace .pc-wrong-detail-heading,
+    .desktop-workspace .pc-answer-strip,
+    .desktop-workspace .pc-explanation-grid,
+    .desktop-workspace .pc-wrong-detail-aside { grid-template-columns: 1fr; flex-direction: column; }
+    .desktop-workspace .pc-practice-board > .pc-card-title,
+    .desktop-workspace .pc-main-card:has(> .pc-review-list) > .pc-card-title { padding-right: 0; }
+    .desktop-workspace .pc-practice-board > .pc-test-tools,
+    .desktop-workspace .pc-main-card:has(> .pc-review-list) > .pc-test-tools {
+      position: static;
+      justify-content: flex-start;
+      margin: 16px 0;
+    }
   }
 }

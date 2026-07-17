@@ -67,7 +67,7 @@
 
     <p class="quiet-help">
       <CircleHelp :size="18" />
-      答题中不提示对错，提交后系统再统一分析张小雨卡在哪些知识点。
+      答题中不提示对错，提交后系统再统一分析{{ demoData.student.name }}卡在哪些知识点。
     </p>
   </PhoneScaffold>
 </template>
@@ -77,7 +77,7 @@ import { ArrowRight, CircleHelp } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { afterClassReviewExam } from "../data/demoData";
+import { afterClassReviewExam, demoData } from "../data/demoData";
 
 const exam = afterClassReviewExam;
 const currentIndex = ref(0);

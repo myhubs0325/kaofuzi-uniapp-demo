@@ -1,6 +1,6 @@
 <template>
   <PhoneScaffold
-    title="数据与隐私"
+    title="账号与数据"
     :meta="`${demoData.guardian.name} · 账号信息`"
     content-class="insight-content account-detail-content"
     shell-class="insight-shell"
@@ -44,7 +44,41 @@
       </div>
 
       <div class="account-form-list">
-        <label v-for="field in editableFields" :key="field.key" class="account-input-field">
+        <label v-for="field in editableFields.slice(0, 3)" :key="field.key" class="account-input-field">
+          <span>{{ field.label }}</span>
+          <input v-model="field.model.value" :readonly="!editing" />
+        </label>
+        <div class="account-school-field">
+          <div class="account-school-heading">
+            <strong>学校信息</strong>
+            <span>完善孩子所在学校</span>
+          </div>
+          <div class="account-school-region">
+            <label>
+              <span>省</span>
+              <select v-model="province" :disabled="!editing" @change="changeProvince">
+                <option v-for="option in provinceOptions" :key="option" :value="option">{{ option }}</option>
+              </select>
+            </label>
+            <label>
+              <span>市</span>
+              <select v-model="city" :disabled="!editing" @change="changeCity">
+                <option v-for="option in cityOptions" :key="option" :value="option">{{ option }}</option>
+              </select>
+            </label>
+            <label>
+              <span>区 / 县</span>
+              <select v-model="district" :disabled="!editing">
+                <option v-for="option in districtOptions" :key="option" :value="option">{{ option }}</option>
+              </select>
+            </label>
+          </div>
+          <label class="account-input-field account-school-name">
+            <span>学校名称</span>
+            <input v-model="schoolName" :readonly="!editing" placeholder="请输入学校全称" />
+          </label>
+        </div>
+        <label v-for="field in editableFields.slice(3)" :key="field.key" class="account-input-field">
           <span>{{ field.label }}</span>
           <input v-model="field.model.value" :readonly="!editing" />
         </label>
@@ -90,10 +124,10 @@ import {
   ShieldCheck,
   UsersRound
 } from "lucide-vue-next";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { demoData } from "../data/demoData";
+import { demoData, schoolRegions } from "../data/demoData";
 
 const editing = ref(false);
 const saved = ref(false);
@@ -102,6 +136,23 @@ const guardianPhone = ref(demoData.guardian.phone);
 const studentName = ref(demoData.student.name);
 const grade = ref(demoData.student.grade);
 const className = ref(demoData.student.className);
+const province = ref(demoData.student.province);
+const city = ref(demoData.student.city);
+const district = ref(demoData.student.district);
+const schoolName = ref(demoData.student.schoolName);
+
+const provinceOptions = Object.keys(schoolRegions);
+const cityOptions = computed(() => Object.keys(schoolRegions[province.value] ?? {}));
+const districtOptions = computed(() => schoolRegions[province.value]?.[city.value] ?? []);
+
+const changeCity = () => {
+  district.value = districtOptions.value[0] ?? "";
+};
+
+const changeProvince = () => {
+  city.value = cityOptions.value[0] ?? "";
+  changeCity();
+};
 
 const editableFields = [
   { key: "guardianName", label: "家长姓名", model: guardianName },

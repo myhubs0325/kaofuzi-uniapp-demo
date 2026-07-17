@@ -132,7 +132,6 @@
               <div class="learning-report-mobile-medal-art">
                 <img :src="badgeAssets[badge.asset]" :alt="`${badge.title}图标`" />
               </div>
-              <span>{{ badge.earned ? '已获得' : '进行中' }}</span>
             </div>
             <div class="learning-report-mobile-medal-copy">
               <div>
@@ -588,11 +587,13 @@ defineEmits<{
 }
 
 .learning-report-mobile-medal-card {
+  position: relative;
   display: grid;
-  grid-template-columns: 76px minmax(0, 1fr) 19px;
+  grid-template-columns: 78px minmax(0, 1fr);
   gap: 11px;
-  align-items: center;
-  padding: 12px 0;
+  align-items: start;
+  min-height: 94px;
+  padding: 10px 25px 10px 0;
   border-bottom: 1px solid #edf1f6;
 }
 
@@ -601,17 +602,18 @@ defineEmits<{
 }
 
 .learning-report-mobile-medal {
-  position: relative;
   display: grid;
   justify-items: center;
-  gap: 3px;
-  min-height: 78px;
+  min-height: 82px;
 }
 
 .learning-report-mobile-medal-art {
-  width: 72px;
+  /* width: 74px;
   height: 82px;
-  display: grid;
+  display: grid; */
+    display: block;
+    width: 80px;
+    height: 95px;
   place-items: center;
 }
 
@@ -620,6 +622,11 @@ defineEmits<{
   height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 5px 7px rgba(117, 87, 29, 0.16));
+}
+
+.learning-report-mobile-medal-card:not(.earned) .learning-report-mobile-medal-art img {
+  opacity: 0.62;
+  filter: grayscale(1) saturate(0.2) drop-shadow(0 4px 7px rgba(91, 104, 121, 0.14));
 }
 
 .learning-report-mobile-medal-ribbon {
@@ -685,22 +692,11 @@ defineEmits<{
   box-shadow: 0 5px 0 #9e8250, 0 7px 14px rgba(91, 104, 121, 0.14), inset 0 0 0 2px rgba(255, 255, 255, 0.65);
 }
 
-.learning-report-mobile-medal > span {
-  position: relative;
-  z-index: 1;
-  color: #a26b16;
-  font-size: 9px;
-  font-weight: 800;
-}
-
-.learning-report-mobile-medal-card.earned .learning-report-mobile-medal > span {
-  color: #238c6b;
-}
-
 .learning-report-mobile-medal-copy {
   display: grid;
   gap: 5px;
   min-width: 0;
+  padding-top: 4px;
 }
 
 .learning-report-mobile-medal-copy > div:first-child {
@@ -733,6 +729,9 @@ defineEmits<{
 }
 
 .learning-report-mobile-medal-status {
+  position: absolute;
+  top: 14px;
+  right: 1px;
   color: #a7b5c5;
 }
 

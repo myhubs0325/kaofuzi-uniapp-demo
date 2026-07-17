@@ -11,7 +11,7 @@
     <section class="preview-lesson-hero-card">
       <div class="preview-lesson-hero-top">
         <div class="preview-lesson-hero-copy">
-          <span class="preview-lesson-kicker">三年级预习课件</span>
+          <span class="preview-lesson-kicker">{{ demoData.student.grade.replace("小学", "") }}预习课件</span>
           <h2>选择学科和课题，生成可讲解的互动课件</h2>
           <p>支持课件预览、语音讲解、下载课件和下载文字教案。</p>
         </div>
@@ -48,7 +48,7 @@
       <div class="preview-lesson-select-group">
         <small>选择课题</small>
         <div class="preview-lesson-select-field">
-          <select v-model="selectedTopicKey">
+          <select v-model="selectedTopicKey" @change="resetGeneratedLesson">
             <option
               v-for="topic in currentSubjectTopics"
               :key="topic.key"
@@ -70,10 +70,16 @@
       <section class="preview-lesson-ppt-card">
         <div class="preview-lesson-section-head">
           <strong>PPT 预览</strong>
-          <span>{{ generatedLesson.topic }} · 第 {{ currentSlideIndex + 1 }} / {{ generatedLesson.slides.length }} 页</span>
+          <span>{{ generatedLesson.topic }}</span>
         </div>
 
         <div class="preview-lesson-toolbar">
+          <button type="button" :class="['preview-lesson-tool-button', { active: previewFormat === 'visual' }]" @click="previewFormat = 'visual'">
+            PPT 预览
+          </button>
+          <button type="button" :class="['preview-lesson-tool-button', { active: previewFormat === 'text' }]" @click="previewFormat = 'text'">
+            文字版 PPT
+          </button>
           <button type="button" class="preview-lesson-tool-button" @click="toggleSpeak">
             <component :is="isSpeaking ? VolumeX : Volume2" :size="17" />
             {{ isSpeaking ? "停止讲解" : "语音讲解本页" }}
@@ -82,9 +88,13 @@
             <Download :size="17" />
             下载课件
           </button>
+          <button type="button" class="preview-lesson-tool-button" @click="downloadTextDeck">
+            <Download :size="17" />
+            下载文字版
+          </button>
         </div>
 
-        <div class="preview-slide-card">
+        <div v-if="previewFormat === 'visual'" class="preview-slide-card">
           <div class="preview-slide-top">
             <span>{{ currentSlide.kicker }}</span>
             <strong>{{ currentSlide.title }}</strong>
@@ -116,7 +126,18 @@
           </div>
         </div>
 
+        <div v-else class="preview-text-slide-card">
+          <span>文字版 PPT · 第 {{ currentSlideIndex + 1 }} / {{ generatedLesson.slides.length }} 页</span>
+          <h3>{{ currentSlide.title }}</h3>
+          <p>{{ currentSlide.bullets[0] }}</p>
+          <ul>
+            <li v-for="point in currentSlide.bullets" :key="point">{{ point }}</li>
+          </ul>
+          <div>{{ currentInteraction.detail }}</div>
+        </div>
+
         <div class="preview-slide-nav">
+          <span>第 {{ currentSlideIndex + 1 }} / {{ generatedLesson.slides.length }} 页</span>
           <button type="button" class="preview-lesson-tool-button" :disabled="currentSlideIndex === 0" @click="previousSlide">
             上一页
           </button>
@@ -193,6 +214,7 @@ import {
 import { computed, onBeforeUnmount, ref } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
+import { demoData } from "../data/demoData";
 
 type LessonSubjectKey = "math" | "chinese" | "english";
 
@@ -474,11 +496,12 @@ const subjectOptions = [
 const randomTemplate = lessonTemplates[Math.floor(Math.random() * lessonTemplates.length)];
 const selectedSubjectKey = ref<LessonSubjectKey>(randomTemplate.subject);
 const selectedTopicKey = ref(randomTemplate.key);
-const generatedLesson = ref<LessonTemplate | null>(lessonTemplates.find((item) => item.key === randomTemplate.key) ?? null);
+const generatedLesson = ref<LessonTemplate | null>(null);
 const currentSlideIndex = ref(0);
 const selectedInteractionIndex = ref(0);
-const expandedPlanIndices = ref<number[]>([0]);
+const expandedPlanIndices = ref<number[]>([]);
 const isSpeaking = ref(false);
+const previewFormat = ref<"visual" | "text">("visual");
 
 const currentSubjectTopics = computed(() =>
   lessonTemplates.filter((item) => item.subject === selectedSubjectKey.value)
@@ -496,15 +519,26 @@ const selectSubject = (subjectKey: LessonSubjectKey) => {
   selectedSubjectKey.value = subjectKey;
   const nextTopic = lessonTemplates.find((item) => item.subject === subjectKey);
   if (nextTopic) selectedTopicKey.value = nextTopic.key;
+  resetGeneratedLesson();
+};
+
+const resetGeneratedLesson = () => {
+  generatedLesson.value = null;
+  previewFormat.value = "visual";
+  expandedPlanIndices.value = [];
+  currentSlideIndex.value = 0;
+  selectedInteractionIndex.value = 0;
+  stopSpeaking();
 };
 
 const generateLesson = () => {
   const lesson = lessonTemplates.find((item) => item.key === selectedTopicKey.value);
   if (!lesson) return;
   generatedLesson.value = lesson;
+  previewFormat.value = "visual";
   currentSlideIndex.value = 0;
   selectedInteractionIndex.value = 0;
-  expandedPlanIndices.value = [0];
+  expandedPlanIndices.value = [];
   stopSpeaking();
 };
 
@@ -597,6 +631,27 @@ const downloadDeck = () => {
   const link = document.createElement("a");
   link.href = url;
   link.download = `${generatedLesson.value.topic}-课件.html`;
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+const downloadTextDeck = () => {
+  if (!generatedLesson.value) return;
+  const text = [
+    `${generatedLesson.value.subjectLabel} · ${generatedLesson.value.topic}`,
+    ...generatedLesson.value.slides.flatMap((slide, index) => [
+      `第 ${index + 1} / ${generatedLesson.value!.slides.length} 页`,
+      slide.title,
+      slide.bullets.join("；"),
+      ...slide.bullets,
+      ""
+    ])
+  ].join("\n");
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${generatedLesson.value.topic}-文字版PPT.txt`;
   link.click();
   URL.revokeObjectURL(url);
 };

@@ -74,7 +74,7 @@
           <b class="simple-rank simple-rank-green">3</b>
           <div>
             <strong>反推出薄弱知识点</strong>
-            <p>不是只看哪道题错，而是找到张小雨到底卡在哪个知识点。</p>
+            <p>不是只看哪道题错，而是找到{{ demoData.student.name }}到底卡在哪个知识点。</p>
           </div>
         </article>
         <article class="simple-flow-item">
@@ -112,6 +112,7 @@ import { computed, ref } from "vue";
 import { ArrowRight, ChevronRight } from "lucide-vue-next";
 import MobileSelectSheet from "../components/MobileSelectSheet.vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
+import { demoData } from "../data/demoData";
 
 defineEmits<{
   back: [];

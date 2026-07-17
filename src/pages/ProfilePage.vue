@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <button type="button" class="bound-child-card" @click="openProfileDetail('OPEN_DATA_PRIVACY')">
+      <button type="button" class="bound-child-card" :aria-expanded="childSelectOpen" @click="childSelectOpen = true">
         <span class="profile-child-avatar child">{{ demoData.student.name.slice(-1) }}</span>
         <div>
           <strong>已绑定 {{ demoData.student.name }}</strong>
@@ -74,6 +74,15 @@
       <strong>家校绑定、提醒和隐私信息都放在“我的”里，字体和声音也可以按老人使用习惯调整。</strong>
     </section>
   </PhoneScaffold>
+
+  <MobileSelectSheet
+    :open="childSelectOpen"
+    title="选择学生"
+    :options="childSelectOptions"
+    :selected-value="demoData.student.name"
+    @close="childSelectOpen = false"
+    @select="selectChild"
+  />
 </template>
 
 <script setup lang="ts">
@@ -84,9 +93,10 @@ import {
   Settings,
   Shield
 } from "lucide-vue-next";
-import type { Component } from "vue";
+import { computed, ref, type Component } from "vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { demoData } from "../data/demoData";
+import { demoData, type DemoChild } from "../data/demoData";
+import MobileSelectSheet from "../components/MobileSelectSheet.vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 
 type ProfileMenuItem = {
@@ -113,7 +123,7 @@ const profileMenu: ProfileMenuItem[] = [
     event: "OPEN_LEARNING_REMINDER"
   },
   {
-    title: "数据与隐私",
+    title: "账号与数据",
     summary: "查看和修改账号、孩子姓名、班级等信息",
     tone: "privacy",
     icon: Shield,
@@ -128,9 +138,25 @@ const profileMenu: ProfileMenuItem[] = [
   }
 ];
 
-defineProps<{
+const props = defineProps<{
+  activeChildId: string;
+  childOptions: DemoChild[];
   elderMode: boolean;
+  switchChild: (childId: string, returnHome?: boolean) => void;
 }>();
+
+const childSelectOpen = ref(false);
+const childSelectOptions = computed(() => props.childOptions.map((child) => ({
+  label: child.student.name,
+  meta: `${child.student.grade} · ${child.student.className}`
+})));
+
+const selectChild = (studentName: string) => {
+  const child = props.childOptions.find((item) => item.student.name === studentName);
+  if (!child) return;
+  childSelectOpen.value = false;
+  props.switchChild(child.id, false);
+};
 
 const emit = defineEmits<{
   navigate: ["home" | "agent" | "learning" | "profile"];

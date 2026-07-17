@@ -636,14 +636,15 @@ const trendAreaPath = computed(() => {
 }
 
 .desktop-learning-report-medal-card {
+  position: relative;
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr) 18px;
+  grid-template-columns: 82px minmax(0, 1fr);
   gap: 13px;
-  align-items: center;
-  min-height: 94px;
+  align-items: start;
+  min-height: 88px;
   min-width: 0;
   overflow: hidden;
-  padding: 10px 0;
+  padding: 8px 24px 8px 0;
   border-bottom: 1px solid #edf1f6;
 }
 
@@ -652,17 +653,18 @@ const trendAreaPath = computed(() => {
 }
 
 .desktop-learning-report-medal {
-  position: relative;
   display: grid;
   justify-items: center;
-  gap: 3px;
-  min-height: 86px;
+  min-height: 80px;
 }
 
 .desktop-learning-report-medal-art {
-  width: 70px;
+ /* width: 70px;
   height: 76px;
-  display: grid;
+  display: grid; */
+   display: block;
+    width: 80px;
+    height: 95px;
   place-items: center;
 }
 
@@ -749,6 +751,7 @@ const trendAreaPath = computed(() => {
   display: grid;
   gap: 5px;
   min-width: 0;
+  padding-top: 3px;
 }
 
 .desktop-learning-report-medal-copy strong,
@@ -781,6 +784,9 @@ const trendAreaPath = computed(() => {
 }
 
 .desktop-learning-report-medal-status {
+  position: absolute;
+  top: 13px;
+  right: 0;
   color: #a8b6c6;
 }
 

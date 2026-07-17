@@ -13,13 +13,27 @@
       </div>
 
       <div class="desktop-global-tools">
+        <button type="button" class="desktop-notification-button" aria-label="学习提醒" @click="$emit('feature-navigate', 'OPEN_LEARNING_REMINDER')">
+          <Bell :size="18" />
+          <span class="desktop-notification-badge">1</span>
+        </button>
         <button type="button" class="desktop-topbar-elder" :aria-pressed="isElderMode" @click="setElderMode(!isElderMode)">
           <span />{{ isElderMode ? "长者模式" : "普通模式" }}
         </button>
-        <button type="button" class="desktop-student-chip" @click="$emit('open-privacy')">
+        <div class="desktop-child-selector">
+        <button type="button" class="desktop-student-chip" :aria-expanded="childMenuOpen" @click="childMenuOpen = !childMenuOpen">
           <span class="desktop-student-avatar">{{ studentName.slice(-1) }}</span>
-          <span><strong>{{ studentName }}</strong><small>{{ gradeLabel }}</small></span>
+          <span><strong>{{ gradeLabel }}</strong><small>{{ studentName }}</small></span>
         </button>
+        <div v-if="childMenuOpen" class="desktop-child-menu">
+          <button v-for="child in childOptions" :key="child.id" type="button" :class="['desktop-child-option', { active: child.id === activeChildId }]" @click="selectChild(child.id)">
+            <span class="desktop-child-option-avatar">{{ child.student.name.slice(-1) }}</span>
+            <span><strong>{{ child.student.name }}</strong><small>{{ child.student.className.replace(/\s/g, '') }}</small></span>
+            <span v-if="child.id === activeChildId" class="desktop-child-check">✓</span>
+          </button>
+          <button type="button" class="desktop-child-manage" @click="$emit('open-privacy'); childMenuOpen = false">信息管理 <span>›</span></button>
+        </div>
+        </div>
       </div>
     </header>
 
@@ -94,11 +108,15 @@
 </template>
 
 <script setup lang="ts">
-import { BookMarked, BookOpenCheck, CalendarDays, Camera, GraduationCap, House, MessageSquareText, TrendingUp, UserRound } from "lucide-vue-next";
+import { ref } from "vue";
+import { Bell, BookMarked, BookOpenCheck, CalendarDays, Camera, GraduationCap, House, MessageSquareText, TrendingUp, UserRound } from "lucide-vue-next";
+import type { DemoChild } from "../data/demoData";
 import type { DemoEvent } from "../composables/useDemoFlow";
 
-defineProps<{
+const props = defineProps<{
   activeTab: "home" | "agent" | "learning" | "profile";
+  activeChildId: string;
+  childOptions: DemoChild[];
   activeFeatureKey?: string;
   gradeLabel: string;
   sectionLabel: string;
@@ -108,6 +126,7 @@ defineProps<{
   showTopbar?: boolean;
   isElderMode: boolean;
   setElderMode: (enabled: boolean) => void;
+  switchChild: (childId: string) => void;
 }>();
 
 defineEmits<{
@@ -135,4 +154,10 @@ const featureNav = [
   { key: "progress", label: "学习报告", icon: TrendingUp, event: "VIEW_PROGRESS" as DemoEvent },
   { key: "teacherFeedback", label: "老师反馈", icon: MessageSquareText, event: "OPEN_TEACHER_FEEDBACK" as DemoEvent }
 ] as const;
+
+const childMenuOpen = ref(false);
+const selectChild = (childId: string) => {
+  childMenuOpen.value = false;
+  props.switchChild(childId);
+};
 </script>

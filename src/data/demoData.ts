@@ -1,8 +1,14 @@
-export const demoData = {
+import { reactive } from "vue";
+
+export const demoData = reactive({
   student: {
     name: "张小雨",
     grade: "小学三年级",
-    className: "三年级 1 班"
+    className: "三年级 1 班",
+    province: "江苏省",
+    city: "南京市",
+    district: "鼓楼区",
+    schoolName: "南京市鼓楼实验小学"
   },
   guardian: {
     name: "张女士",
@@ -72,7 +78,83 @@ export const demoData = {
     ],
     teacherNote: "王老师说：小雨借位步骤已经更稳定，下周会继续观察应用题读题。"
   }
-} as const;
+});
+
+export const schoolRegions: Record<string, Record<string, string[]>> = {
+  江苏省: {
+    南京市: ["鼓楼区", "玄武区", "建邺区"],
+    苏州市: ["姑苏区", "吴中区", "相城区"]
+  },
+  浙江省: {
+    杭州市: ["西湖区", "上城区", "拱墅区"],
+    宁波市: ["海曙区", "鄞州区", "江北区"]
+  },
+  安徽省: {
+    合肥市: ["蜀山区", "庐阳区", "包河区"],
+    芜湖市: ["镜湖区", "鸠江区", "弋江区"]
+  }
+};
+
+export type DemoChild = {
+  id: string;
+  student: typeof demoData.student;
+  task: typeof demoData.task;
+  progress: typeof demoData.progress;
+  teacher: typeof demoData.teacher;
+};
+
+export const demoChildren: DemoChild[] = [
+  {
+    id: "child-xiaoyu",
+    student: { ...demoData.student },
+    task: { ...demoData.task },
+    progress: { ...demoData.progress },
+    teacher: { ...demoData.teacher }
+  },
+  {
+    id: "child-xiaocheng",
+    student: {
+      name: "\u5f20\u5c0f\u6668",
+      grade: "\u5c0f\u5b66\u4e94\u5e74\u7ea7",
+      className: "\u4e94\u5e74\u7ea7 2 \u73ed",
+      province: "江苏省",
+      city: "南京市",
+      district: "玄武区",
+      schoolName: "南京市玄武外国语学校"
+    },
+    task: {
+      ...demoData.task,
+      title: "\u5206\u6570\u52a0\u51cf\u6df7\u5408\u8ba1\u7b97",
+      durationMinutes: 12,
+      questionCount: 6,
+      weakPointCount: 3
+    },
+    progress: {
+      ...demoData.progress,
+      previousAccuracy: 61,
+      currentAccuracy: 68,
+      closedKnowledgePoints: 1,
+      headline: "\u5f20\u5c0f\u6668\u6b63\u5728\u8865\u9f50\u5206\u6570\u8ba1\u7b97\u7684\u57fa\u7840\u6b65\u9aa4",
+      summary: "\u6700\u8fd1\u7684\u4e3b\u8981\u95ee\u9898\u662f\u901a\u5206\u548c\u8fd0\u7b97\u987a\u5e8f\uff0c\u5efa\u8bae\u5148\u5b8c\u6210\u6bcf\u5929 12 \u5206\u949f\u7684\u9488\u5bf9\u7ec3\u4e60"
+    },
+    teacher: {
+      ...demoData.teacher,
+      name: "\u674e\u8001\u5e08",
+      wrongQuestionCount: 7,
+      syncedAt: "\u4eca\u5929 15:40"
+    }
+  }
+];
+
+export const switchDemoChild = (childId: string) => {
+  const child = demoChildren.find((item) => item.id === childId);
+  if (!child) return false;
+  demoData.student = { ...child.student };
+  demoData.task = { ...child.task };
+  demoData.progress = { ...child.progress };
+  demoData.teacher = { ...child.teacher };
+  return true;
+};
 
 export const afterClassReviewExam = {
   studentName: "张小雨",

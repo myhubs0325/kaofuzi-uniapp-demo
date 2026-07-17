@@ -10,7 +10,7 @@
   >
     <section class="feedback-hero-card review-result-hero">
       <div class="feedback-tip-head">
-        <strong>张小雨本次课后复习</strong>
+        <strong>{{ demoData.student.name }}本次课后复习</strong>
         <span>像小测一样先做完，再复盘</span>
       </div>
       <div class="review-score-board">
@@ -25,7 +25,7 @@
       </div>
       <p>
         系统没有在答题中途纠正，而是在提交后根据对错集中判断：
-        张小雨基础题能做对，主要卡在“连续退位遇到 0 时怎么借位”。
+        {{ demoData.student.name }}基础题能做对，主要卡在“连续退位遇到 0 时怎么借位”。
       </p>
     </section>
 
@@ -44,7 +44,7 @@
           <div>
             <strong>{{ question.prompt }}</strong>
             <span>
-              张小雨选：{{ question.studentAnswer }} · 正确：{{ question.correctAnswer }}
+              {{ demoData.student.name }}选：{{ question.studentAnswer }} · 正确：{{ question.correctAnswer }}
             </span>
             <small>对应知识点：{{ question.knowledgePoint }}</small>
           </div>
@@ -85,7 +85,7 @@ import { ArrowRight } from "lucide-vue-next";
 import { computed } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { afterClassReviewExam } from "../data/demoData";
+import { afterClassReviewExam, demoData } from "../data/demoData";
 
 const exam = afterClassReviewExam;
 const correctCount = computed(

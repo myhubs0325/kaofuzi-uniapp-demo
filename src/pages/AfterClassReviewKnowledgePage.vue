@@ -37,7 +37,7 @@
 
     <section class="feedback-tip-card feedback-step-card">
       <div class="feedback-tip-head">
-        <strong>张小雨要按这个顺序想</strong>
+        <strong>{{ demoData.student.name }}要按这个顺序想</strong>
         <span>先理解，再做题</span>
       </div>
       <div class="feedback-step-list">
@@ -79,7 +79,7 @@ import { ArrowRight, Volume2, VolumeX } from "lucide-vue-next";
 import { onBeforeUnmount, ref } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { afterClassReviewExam } from "../data/demoData";
+import { afterClassReviewExam, demoData } from "../data/demoData";
 
 const exam = afterClassReviewExam;
 const explain = afterClassReviewExam.knowledgeExplain;

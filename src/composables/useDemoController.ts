@@ -1,5 +1,5 @@
 import { computed, provide, ref } from "vue";
-import type { PracticeEntryKey, ScreenKey, WrongBookTopicKey } from "../data/demoData";
+import { demoChildren, switchDemoChild, type PracticeEntryKey, type ScreenKey, type WrongBookTopicKey } from "../data/demoData";
 import { useDemoFlow, type DemoEvent } from "./useDemoFlow";
 
 export function useDemoController() {
@@ -8,6 +8,12 @@ export function useDemoController() {
   const selectedPracticeSourceKey = ref<PracticeEntryKey>("dailyBoost");
   const profileDetailReturnScreen = ref<ScreenKey>("profile");
   const displayModeStorageKey = "kaofuzi-display-mode";
+  const childStorageKey = "kaofuzi-current-child";
+  const initialChildId = typeof window !== "undefined"
+    ? window.localStorage.getItem(childStorageKey) ?? demoChildren[0].id
+    : demoChildren[0].id;
+  const activeChildId = ref(demoChildren.some((child) => child.id === initialChildId) ? initialChildId : demoChildren[0].id);
+  switchDemoChild(activeChildId.value);
 
   const getSavedDisplayMode = () => {
     if (typeof window === "undefined") return "normal";
@@ -23,6 +29,15 @@ export function useDemoController() {
     if (typeof window !== "undefined") {
       window.localStorage.setItem(displayModeStorageKey, displayMode.value);
     }
+  };
+
+  const switchChild = (childId: string, returnHome = true) => {
+    if (childId === activeChildId.value || !switchDemoChild(childId)) return;
+    activeChildId.value = childId;
+    selectedWrongBookTopicKey.value = "borrowSubtraction";
+    selectedPracticeSourceKey.value = "dailyBoost";
+    if (returnHome) reset();
+    if (typeof window !== "undefined") window.localStorage.setItem(childStorageKey, childId);
   };
 
   provide("openDataPrivacy", () => {
@@ -106,6 +121,8 @@ export function useDemoController() {
 
   return {
     activeTab,
+    activeChildId,
+    childOptions: demoChildren,
     currentScreen,
     displayModeClass,
     goBack,
@@ -117,6 +134,7 @@ export function useDemoController() {
     selectedPracticeSourceKey,
     selectedWrongBookTopicKey,
     setElderMode,
+    switchChild,
     startPracticeFromSource
   };
 }

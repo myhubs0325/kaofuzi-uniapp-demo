@@ -1597,6 +1597,72 @@ a:focus-visible {
   color: #5f6e87;
 }
 
+.account-school-field {
+  display: grid;
+  gap: 14px;
+  margin-top: 4px;
+  padding: 15px;
+  background: rgba(248, 250, 252, 0.72);
+  border: 1px solid rgba(224, 229, 236, 0.96);
+  border-radius: 18px;
+}
+
+.account-school-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.account-school-heading strong {
+  color: #1d1d1f;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.account-school-heading span,
+.account-school-region label > span {
+  color: #6e7d93;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.account-school-region {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.account-school-region label {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.account-school-region select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 8px;
+  color: #1d1d1f;
+  background: #ffffff;
+  border: 1px solid rgba(224, 229, 236, 0.96);
+  border-radius: 12px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.account-school-region select:disabled {
+  color: #5f6e87;
+  opacity: 1;
+}
+
+.account-school-name {
+  padding-top: 12px;
+  border-top: 1px solid rgba(224, 229, 236, 0.92);
+}
+
 .account-text-button,
 .account-secondary-button {
   min-height: 40px;
@@ -3722,11 +3788,28 @@ a:focus-visible {
     0 14px 26px rgba(10, 132, 255, 0.22);
 }
 
-.preview-lesson-toolbar,
-.preview-slide-nav {
+.preview-lesson-toolbar {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+}
+
+.preview-slide-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.preview-slide-nav > span {
+  color: #6f7f96;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.preview-slide-nav .preview-lesson-tool-button {
+  min-height: 36px;
+  padding-inline: 14px;
 }
 
 .preview-lesson-tool-button {
@@ -3752,6 +3835,12 @@ a:focus-visible {
 .preview-lesson-tool-button:disabled {
   opacity: 0.56;
   cursor: default;
+}
+
+.preview-lesson-tool-button.active {
+  color: #0a84ff;
+  background: #eaf4ff;
+  border-color: rgba(10, 132, 255, 0.2);
 }
 
 .preview-slide-card {
@@ -3849,6 +3938,39 @@ a:focus-visible {
   color: #4f5f79;
   font-size: 14px;
   line-height: 1.7;
+}
+
+.preview-text-slide-card {
+  display: grid;
+  gap: 12px;
+  min-height: 245px;
+  padding: 20px;
+  color: #4f5f79;
+  background: linear-gradient(145deg, #f3f8ff, #eaf3ff);
+  border: 1px solid #d7e7fb;
+  border-radius: 24px;
+}
+
+.preview-text-slide-card > span {
+  color: #246fb8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.preview-text-slide-card h3 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: 22px;
+}
+
+.preview-text-slide-card p,
+.preview-text-slide-card ul {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.preview-text-slide-card ul {
+  padding-left: 22px;
 }
 
 .preview-plan-list {

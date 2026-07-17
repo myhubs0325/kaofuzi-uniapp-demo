@@ -15,7 +15,7 @@ export const screenDefinitions: ScreenDefinition[] = [
   { key: "profile", title: "我的", summary: "家长账号与服务设置。", section: "profile" },
   { key: "schoolBinding", title: "学校绑定", summary: "绑定老师与学生关系。", section: "profile" },
   { key: "learningReminder", title: "学习提醒", summary: "提醒时间与方式设置。", section: "profile" },
-  { key: "dataPrivacy", title: "数据隐私", summary: "账号、学生和隐私说明。", section: "profile" },
+  { key: "dataPrivacy", title: "账号与数据", summary: "账号资料、学生信息和数据使用说明。", section: "profile" },
   { key: "accountSettings", title: "账号设置", summary: "基础设置与安全项。", section: "profile" },
   { key: "accountCancel", title: "账号注销", summary: "注销前提醒与确认。", section: "profile" },
   { key: "wrongBook", title: "错题本", summary: "按高频失分点整理错题。", section: "learning" },

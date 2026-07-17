@@ -23,7 +23,10 @@
       />
       <ProfilePage
         v-else-if="currentScreen === 'profile'"
+        :active-child-id="activeChildId"
+        :child-options="childOptions"
         :elder-mode="isElderMode"
+        :switch-child="switchChild"
         @navigate="handleNav"
         @action="handleAction"
         @toggle-elder-mode="setElderMode"
@@ -175,7 +178,7 @@
 
 <script setup lang="ts">
 import type { DemoEvent } from "../composables/useDemoFlow";
-import type { PracticeEntryKey, ScreenKey, WrongBookTopicKey } from "../data/demoData";
+import type { DemoChild, PracticeEntryKey, ScreenKey, WrongBookTopicKey } from "../data/demoData";
 import AccountCancelPage from "../pages/AccountCancelPage.vue";
 import AccountSettingsPage from "../pages/AccountSettingsPage.vue";
 import AgentPage from "../pages/AgentPage.vue";
@@ -208,6 +211,8 @@ import WrongPage from "../pages/WrongPage.vue";
 
 defineProps<{
   currentScreen: ScreenKey;
+  activeChildId: string;
+  childOptions: DemoChild[];
   displayModeClass: string;
   handleAction: (event: DemoEvent) => void;
   handleNav: (tab: "home" | "agent" | "learning" | "profile") => void;
@@ -215,6 +220,7 @@ defineProps<{
   selectedPracticeSourceKey: PracticeEntryKey;
   selectedWrongBookTopicKey: WrongBookTopicKey;
   setElderMode: (enabled: boolean) => void;
+  switchChild: (childId: string, returnHome?: boolean) => void;
   startPracticeFromSource: (sourceKey: PracticeEntryKey) => void;
   openWrongBookDetail: (topicKey: WrongBookTopicKey) => void;
 }>();

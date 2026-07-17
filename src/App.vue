@@ -2,6 +2,9 @@
   <div class="app-root">
     <MobileRenderer
       v-if="platformMode === 'mobile'"
+      :key="activeChildId"
+      :active-child-id="activeChildId"
+      :child-options="childOptions"
       :current-screen="currentScreen"
       :display-mode-class="displayModeClass"
       :handle-action="handleAction"
@@ -11,10 +14,14 @@
       :selected-practice-source-key="selectedPracticeSourceKey"
       :selected-wrong-book-topic-key="selectedWrongBookTopicKey"
       :set-elder-mode="setElderMode"
+      :switch-child="switchChild"
       :start-practice-from-source="startPracticeFromSource"
     />
     <DesktopRenderer
       v-else
+      :key="activeChildId"
+      :active-child-id="activeChildId"
+      :child-options="childOptions"
       :active-tab="activeTab"
       :current-screen="currentScreen"
       :go-back="goBack"
@@ -26,6 +33,7 @@
       :selected-practice-source-key="selectedPracticeSourceKey"
       :selected-wrong-book-topic-key="selectedWrongBookTopicKey"
       :set-elder-mode="setElderMode"
+      :switch-child="switchChild"
       :start-practice-from-source="startPracticeFromSource"
     />
   </div>
@@ -42,6 +50,8 @@ type PlatformMode = Exclude<PlatformPreference, "auto">;
 
 const {
   activeTab,
+  activeChildId,
+  childOptions,
   currentScreen,
   displayModeClass,
   goBack,
@@ -53,6 +63,7 @@ const {
   selectedPracticeSourceKey,
   selectedWrongBookTopicKey,
   setElderMode,
+  switchChild,
   startPracticeFromSource
 } = useDemoController();
 

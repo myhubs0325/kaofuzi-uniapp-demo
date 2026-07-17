@@ -39,7 +39,7 @@
           <span>{{ size }}</span>
         </button>
       </div>
-      <p class="settings-preview" :class="fontPreviewClass">张小雨今天先完成 8 分钟练习，做完后看学习报告。</p>
+      <p class="settings-preview" :class="fontPreviewClass">{{ demoData.student.name }}今天先完成 8 分钟练习，做完后看学习报告。</p>
     </section>
 
     <section class="account-section">
@@ -116,6 +116,7 @@ import {
 import { computed, ref } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
+import { demoData } from "../data/demoData";
 
 const fontSizes = ["标准", "大号", "超大"];
 const fontSize = ref("大号");
