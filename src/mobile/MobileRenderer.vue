@@ -43,6 +43,12 @@
       />
       <DataPrivacyPage
         v-else-if="currentScreen === 'dataPrivacy'"
+        :active-child-id="activeChildId"
+        :children="childOptions"
+        :add-child="addChild"
+        :update-child="updateChild"
+        :delete-child="deleteChild"
+        :set-current-child="selectCurrentChild"
         @navigate="handleNav"
         @action="handleAction"
       />
@@ -178,7 +184,7 @@
 
 <script setup lang="ts">
 import type { DemoEvent } from "../composables/useDemoFlow";
-import type { DemoChild, PracticeEntryKey, ScreenKey, WrongBookTopicKey } from "../data/demoData";
+import type { DemoChild, PracticeEntryKey, ScreenKey, StudentProfile, WrongBookTopicKey } from "../data/demoData";
 import AccountCancelPage from "../pages/AccountCancelPage.vue";
 import AccountSettingsPage from "../pages/AccountSettingsPage.vue";
 import AgentPage from "../pages/AgentPage.vue";
@@ -209,19 +215,24 @@ import WrongBookDetailPage from "../pages/WrongBookDetailPage.vue";
 import WrongBookPage from "../pages/WrongBookPage.vue";
 import WrongPage from "../pages/WrongPage.vue";
 
-defineProps<{
+const props = defineProps<{
   currentScreen: ScreenKey;
   activeChildId: string;
+  addChild: (student: StudentProfile) => boolean;
   childOptions: DemoChild[];
   displayModeClass: string;
   handleAction: (event: DemoEvent) => void;
   handleNav: (tab: "home" | "agent" | "learning" | "profile") => void;
   isElderMode: boolean;
+  deleteChild: (childId: string) => boolean;
   selectedPracticeSourceKey: PracticeEntryKey;
   selectedWrongBookTopicKey: WrongBookTopicKey;
   setElderMode: (enabled: boolean) => void;
   switchChild: (childId: string, returnHome?: boolean) => void;
+  updateChild: (childId: string, student: StudentProfile) => boolean;
   startPracticeFromSource: (sourceKey: PracticeEntryKey) => void;
   openWrongBookDetail: (topicKey: WrongBookTopicKey) => void;
 }>();
+
+const selectCurrentChild = (childId: string) => props.switchChild(childId, false);
 </script>

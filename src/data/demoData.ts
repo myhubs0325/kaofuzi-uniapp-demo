@@ -103,7 +103,7 @@ export type DemoChild = {
   teacher: typeof demoData.teacher;
 };
 
-export const demoChildren: DemoChild[] = [
+export const demoChildren = reactive<DemoChild[]>([
   {
     id: "child-xiaoyu",
     student: { ...demoData.student },
@@ -144,7 +144,7 @@ export const demoChildren: DemoChild[] = [
       syncedAt: "\u4eca\u5929 15:40"
     }
   }
-];
+]);
 
 export const switchDemoChild = (childId: string) => {
   const child = demoChildren.find((item) => item.id === childId);
@@ -153,6 +153,40 @@ export const switchDemoChild = (childId: string) => {
   demoData.task = { ...child.task };
   demoData.progress = { ...child.progress };
   demoData.teacher = { ...child.teacher };
+  return true;
+};
+
+export type StudentProfile = DemoChild["student"];
+
+const createChildId = () => {
+  if (typeof crypto !== "undefined" && "randomUUID" in crypto) return `child-${crypto.randomUUID()}`;
+  return `child-${Date.now()}`;
+};
+
+export const addDemoChild = (student: StudentProfile, childId = createChildId()) => {
+  const template = demoChildren[0];
+  const child: DemoChild = {
+    id: childId,
+    student: { ...student },
+    task: { ...(template?.task ?? demoData.task) },
+    progress: { ...(template?.progress ?? demoData.progress) },
+    teacher: { ...(template?.teacher ?? demoData.teacher) }
+  };
+  demoChildren.push(child);
+  return child;
+};
+
+export const updateDemoChild = (childId: string, student: StudentProfile) => {
+  const child = demoChildren.find((item) => item.id === childId);
+  if (!child) return false;
+  child.student = { ...student };
+  return true;
+};
+
+export const removeDemoChild = (childId: string) => {
+  const index = demoChildren.findIndex((item) => item.id === childId);
+  if (index === -1 || demoChildren.length <= 1) return false;
+  demoChildren.splice(index, 1);
   return true;
 };
 

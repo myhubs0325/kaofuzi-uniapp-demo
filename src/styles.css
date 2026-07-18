@@ -1688,6 +1688,143 @@ a:focus-visible {
   min-height: 60px;
 }
 
+.student-manager {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(248, 250, 252, 0.72);
+  border: 1px solid rgba(224, 229, 236, 0.96);
+  border-radius: 22px;
+}
+
+.student-manager-head,
+.student-manager-form-head,
+.student-manager-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.student-manager-head h3 {
+  margin: 3px 0 0;
+  color: #1d1d1f;
+  font-size: 19px;
+}
+
+.student-manager-kicker,
+.student-manager-count,
+.student-manager-lead,
+.student-manager-info span,
+.student-manager-info small,
+.student-manager-fields label > span,
+.student-manager-field-label {
+  color: #6e7d93;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.student-manager-count { white-space: nowrap; }
+.student-manager-lead { margin: -5px 0 0; line-height: 1.5; }
+.student-manager-list { display: grid; gap: 10px; }
+
+.student-manager-card {
+  display: grid;
+  gap: 12px;
+  padding: 13px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(224, 229, 236, 0.96);
+  border-radius: 18px;
+}
+
+.student-manager-row {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 11px;
+}
+
+.student-manager-avatar {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: linear-gradient(145deg, #1687ff, #0a6bda);
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.student-manager-info { min-width: 0; display: grid; gap: 3px; }
+.student-manager-info strong { overflow: hidden; color: #1d1d1f; font-size: 16px; text-overflow: ellipsis; white-space: nowrap; }
+.student-manager-info span,
+.student-manager-info small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.student-manager-current,
+.student-manager-current-button { white-space: nowrap; }
+.student-manager-current { color: #178552; font-size: 12px; font-weight: 750; }
+.student-manager-current-button,
+.student-manager-action,
+.student-manager-cancel,
+.student-manager-save,
+.student-manager-remove-confirm,
+.student-manager-add-button {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+.student-manager-current-button,
+.student-manager-action,
+.student-manager-cancel { color: #286db2; background: #f3f8ff; border: 1px solid #d4e6fb; }
+.student-manager-actions { display: flex; align-items: center; gap: 6px; }
+.student-manager-more { position: relative; }
+.student-manager-menu { position: absolute; z-index: 3; top: calc(100% + 5px); right: 0; min-width: 104px; padding: 5px; background: #fff; border: 1px solid #e0e5ec; border-radius: 11px; box-shadow: 0 10px 24px rgba(42, 61, 84, 0.16); }
+.student-manager-menu button { width: 100%; padding: 8px 9px; color: #b34d4d; background: transparent; border: 0; border-radius: 8px; cursor: pointer; text-align: left; font: inherit; font-size: 12px; font-weight: 700; }
+.student-manager-menu button:hover { background: #fff3f3; }
+.student-manager-edit { display: grid; gap: 14px; padding: 14px; background: #f8fbff; border: 1px solid #dbe9f8; border-radius: 15px; }
+.student-manager-form-head strong { color: #1d1d1f; font-size: 14px; }
+.student-manager-close { display: inline-grid; place-items: center; width: 30px; height: 30px; color: #6e7d93; background: #fff; border: 1px solid #dbe3ec; border-radius: 9px; cursor: pointer; }
+.student-manager-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.student-manager-fields label,
+.student-manager-school-fields { display: grid; gap: 6px; }
+.student-manager-school-fields { grid-column: 1 / -1; }
+.student-manager-school-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+.student-manager-fields input,
+.student-manager-fields select { width: 100%; min-width: 0; min-height: 40px; padding: 0 10px; color: #1d1d1f; background: #fff; border: 1px solid #dbe3ec; border-radius: 10px; font: inherit; font-size: 13px; }
+.student-manager-fields input:focus,
+.student-manager-fields select:focus { outline: 2px solid rgba(10, 132, 255, 0.18); border-color: #8ebcf0; }
+.student-manager-form-actions { justify-content: flex-end; }
+.student-manager-save,
+.student-manager-add-button { color: #fff; background: linear-gradient(135deg, #1687ff, #0a6bda); border: 1px solid transparent; }
+.student-manager-add-button { width: 100%; min-height: 42px; font-size: 13px; }
+.student-manager-notice { margin: -3px 0 0; color: #b34d4d; font-size: 12px; font-weight: 650; }
+.student-manager-confirm-backdrop { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 20px; background: rgba(20, 31, 48, 0.32); backdrop-filter: blur(6px); }
+.student-manager-confirm { width: min(100%, 390px); display: grid; gap: 12px; padding: 22px; background: #fff; border: 1px solid #e5eaf0; border-radius: 20px; box-shadow: 0 24px 70px rgba(21, 39, 68, 0.24); }
+.student-manager-confirm-icon { width: 38px; height: 38px; display: grid; place-items: center; color: #ba5656; background: #fff1f1; border-radius: 12px; }
+.student-manager-confirm h4 { margin: 0; color: #1d1d1f; font-size: 18px; }
+.student-manager-confirm p { margin: 0; color: #6e6e73; font-size: 13px; line-height: 1.65; }
+.student-manager-remove-confirm { color: #fff; background: #d86161; border: 1px solid #d86161; }
+
+@media (max-width: 700px) {
+  .student-manager-row { grid-template-columns: 42px minmax(0, 1fr) auto; }
+  .student-manager-current,
+  .student-manager-current-button { grid-column: 2; justify-self: start; }
+  .student-manager-actions { grid-column: 3; grid-row: 1 / span 2; flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 420px) {
+  .student-manager-fields { grid-template-columns: 1fr; }
+  .student-manager-school-fields { grid-column: auto; }
+}
+
 .account-segment-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

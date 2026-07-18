@@ -4,23 +4,27 @@
       v-if="platformMode === 'mobile'"
       :key="activeChildId"
       :active-child-id="activeChildId"
+      :add-child="addChild"
       :child-options="childOptions"
       :current-screen="currentScreen"
       :display-mode-class="displayModeClass"
       :handle-action="handleAction"
       :handle-nav="handleNav"
       :is-elder-mode="isElderMode"
+      :delete-child="deleteChild"
       :open-wrong-book-detail="openWrongBookDetail"
       :selected-practice-source-key="selectedPracticeSourceKey"
       :selected-wrong-book-topic-key="selectedWrongBookTopicKey"
       :set-elder-mode="setElderMode"
       :switch-child="switchChild"
+      :update-child="updateChild"
       :start-practice-from-source="startPracticeFromSource"
     />
     <DesktopRenderer
       v-else
       :key="activeChildId"
       :active-child-id="activeChildId"
+      :add-child="addChild"
       :child-options="childOptions"
       :active-tab="activeTab"
       :current-screen="currentScreen"
@@ -28,12 +32,14 @@
       :handle-action="handleAction"
       :handle-nav="handleNav"
       :is-elder-mode="isElderMode"
+      :delete-child="deleteChild"
       :open-wrong-book-detail="openWrongBookDetail"
       :reset="reset"
       :selected-practice-source-key="selectedPracticeSourceKey"
       :selected-wrong-book-topic-key="selectedWrongBookTopicKey"
       :set-elder-mode="setElderMode"
       :switch-child="switchChild"
+      :update-child="updateChild"
       :start-practice-from-source="startPracticeFromSource"
     />
   </div>
@@ -51,9 +57,11 @@ type PlatformMode = Exclude<PlatformPreference, "auto">;
 const {
   activeTab,
   activeChildId,
+  addChild,
   childOptions,
   currentScreen,
   displayModeClass,
+  deleteChild,
   goBack,
   handleAction,
   handleNav,
@@ -64,6 +72,7 @@ const {
   selectedWrongBookTopicKey,
   setElderMode,
   switchChild,
+  updateChild,
   startPracticeFromSource
 } = useDemoController();
 

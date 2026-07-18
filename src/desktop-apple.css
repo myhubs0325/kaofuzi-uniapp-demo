@@ -1314,6 +1314,89 @@
     justify-self: start;
   }
 
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-profile-edit-button) .pc-form-grid > .pc-field:nth-child(n + 3) {
+    display: none;
+  }
+
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-profile-edit-button) > .pc-eyebrow,
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-profile-edit-button) > h2,
+  .desktop-workspace .pc-layout-2 > .pc-main-card:has(.pc-profile-edit-button) > .pc-lead {
+    display: none;
+  }
+
+  .desktop-workspace .pc-data-privacy-layout {
+    align-items: start;
+  }
+
+  .desktop-workspace .pc-data-privacy-main {
+    position: relative;
+    display: grid;
+    align-content: start;
+    gap: 16px;
+    padding: 24px !important;
+  }
+
+  .desktop-workspace .pc-data-privacy-main > .pc-eyebrow,
+  .desktop-workspace .pc-data-privacy-main > h2,
+  .desktop-workspace .pc-data-privacy-main > .pc-lead {
+    display: none;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .pc-guardian-form {
+    margin: 0;
+    padding: 22px 150px 22px 24px;
+    border: 1px solid #edf1f6;
+    border-radius: 16px;
+    background: #f8fafc;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .pc-guardian-form .pc-field input[readonly] {
+    padding: 0 12px;
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .pc-guardian-form .pc-field input:not([readonly]) {
+    border-color: #91bcff;
+    background: #fff;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .pc-profile-edit-button {
+    position: absolute;
+    top: 42px;
+    right: 24px;
+    width: 120px !important;
+    min-width: 120px !important;
+    max-width: 120px !important;
+    margin: 0;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .student-manager {
+    margin-top: 8px;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .student-manager-compact {
+    margin: 0 8px;
+    padding: 0 8px;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .student-manager-compact .student-manager-head,
+  .desktop-workspace .pc-data-privacy-main .student-manager-compact .student-manager-lead {
+    display: none;
+  }
+
+  .desktop-workspace .pc-data-privacy-main .student-manager-compact .student-manager-card {
+    padding: 14px 8px;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   /* Shared button baseline for every PC action variant, including modal danger actions. */
   .desktop-workspace button.pc-primary,
   .desktop-workspace button.pc-secondary,

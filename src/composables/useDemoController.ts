@@ -1,5 +1,5 @@
 import { computed, provide, ref } from "vue";
-import { demoChildren, switchDemoChild, type PracticeEntryKey, type ScreenKey, type WrongBookTopicKey } from "../data/demoData";
+import { addDemoChild, demoChildren, removeDemoChild, switchDemoChild, updateDemoChild, type PracticeEntryKey, type ScreenKey, type StudentProfile, type WrongBookTopicKey } from "../data/demoData";
 import { useDemoFlow, type DemoEvent } from "./useDemoFlow";
 
 export function useDemoController() {
@@ -38,6 +38,25 @@ export function useDemoController() {
     selectedPracticeSourceKey.value = "dailyBoost";
     if (returnHome) reset();
     if (typeof window !== "undefined") window.localStorage.setItem(childStorageKey, childId);
+  };
+
+  const addChild = (student: StudentProfile) => {
+    const child = addDemoChild(student);
+    activeChildId.value = child.id;
+    switchDemoChild(child.id);
+    if (typeof window !== "undefined") window.localStorage.setItem(childStorageKey, child.id);
+    return true;
+  };
+
+  const updateChild = (childId: string, student: StudentProfile) => {
+    if (!updateDemoChild(childId, student)) return false;
+    if (childId === activeChildId.value) switchDemoChild(childId);
+    return true;
+  };
+
+  const deleteChild = (childId: string) => {
+    if (childId === activeChildId.value || demoChildren.length <= 1) return false;
+    return removeDemoChild(childId);
   };
 
   provide("openDataPrivacy", () => {
@@ -122,9 +141,11 @@ export function useDemoController() {
   return {
     activeTab,
     activeChildId,
+    addChild,
     childOptions: demoChildren,
     currentScreen,
     displayModeClass,
+    deleteChild,
     goBack,
     handleAction,
     handleNav,
@@ -135,6 +156,7 @@ export function useDemoController() {
     selectedWrongBookTopicKey,
     setElderMode,
     switchChild,
+    updateChild,
     startPracticeFromSource
   };
 }

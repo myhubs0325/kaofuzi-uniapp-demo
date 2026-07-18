@@ -44,11 +44,11 @@
       </div>
 
       <div class="account-form-list">
-        <label v-for="field in editableFields.slice(0, 3)" :key="field.key" class="account-input-field">
+        <label v-for="field in editableFields.slice(0, 2)" :key="field.key" class="account-input-field">
           <span>{{ field.label }}</span>
           <input v-model="field.model.value" :readonly="!editing" />
         </label>
-        <div class="account-school-field">
+        <div v-if="false" class="account-school-field">
           <div class="account-school-heading">
             <strong>学校信息</strong>
             <span>完善孩子所在学校</span>
@@ -78,12 +78,21 @@
             <input v-model="schoolName" :readonly="!editing" placeholder="请输入学校全称" />
           </label>
         </div>
-        <label v-for="field in editableFields.slice(3)" :key="field.key" class="account-input-field">
+        <label v-if="false" v-for="field in editableFields.slice(3)" :key="field.key" class="account-input-field">
           <span>{{ field.label }}</span>
           <input v-model="field.model.value" :readonly="!editing" />
         </label>
       </div>
     </section>
+
+    <StudentManager
+      :active-child-id="props.activeChildId"
+      :children="props.children"
+      :add-child="props.addChild"
+      :update-child="props.updateChild"
+      :delete-child="props.deleteChild"
+      :set-current-child="props.setCurrentChild"
+    />
 
     <section class="account-section">
       <div class="account-section-head">
@@ -125,9 +134,10 @@ import {
   UsersRound
 } from "lucide-vue-next";
 import { computed, ref } from "vue";
+import StudentManager from "../components/StudentManager.vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { demoData, schoolRegions } from "../data/demoData";
+import { demoData, schoolRegions, type DemoChild, type StudentProfile } from "../data/demoData";
 
 const editing = ref(false);
 const saved = ref(false);
@@ -161,6 +171,15 @@ const editableFields = [
   { key: "grade", label: "年级", model: grade },
   { key: "className", label: "班级", model: className }
 ];
+
+const props = defineProps<{
+  activeChildId: string;
+  children: DemoChild[];
+  addChild: (student: StudentProfile) => boolean;
+  updateChild: (childId: string, student: StudentProfile) => boolean;
+  deleteChild: (childId: string) => boolean;
+  setCurrentChild: (childId: string) => void;
+}>();
 
 const toggleEdit = () => {
   if (editing.value) {

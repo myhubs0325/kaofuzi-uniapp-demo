@@ -158,14 +158,24 @@
       <template v-else-if="screenKey === 'profile'"><section class="pc-layout-2"><article class="pc-card pc-main-card"><span class="pc-eyebrow">家长账号</span><h2>你好，{{ demoData.guardian.name }}</h2><p class="pc-lead">{{ accountDescription }}</p><div class="pc-profile-box"><span class="pc-avatar pc-avatar-large">{{ demoData.guardian.name.slice(0, 1) }}</span><div><strong>{{ demoData.guardian.name }}</strong><small>{{ demoData.guardian.relation }} · {{ demoData.guardian.phone }}</small></div><button class="pc-secondary" @click="setElderMode(!isElderMode)">{{ isElderMode ? '关闭长者模式' : '开启长者模式' }}</button></div><div class="pc-account-list"><button v-for="item in accountItems" :key="item.title" class="pc-account-row" @click="handleAccountItem(item)"><span class="pc-shortcut-icon">{{ item.icon }}</span><span><strong>{{ item.title }}</strong><small>{{ item.summary }}</small></span><ChevronRight :size="17" /></button></div></article><aside class="pc-card pc-side-stack"><h3>孩子信息</h3><div class="pc-selection-list"><div v-for="item in accountDetailItems" :key="item.label"><span>{{ item.label }}</span><strong>{{ item.value }}</strong></div></div></aside></section></template>
 
       <template v-else-if="isAccountScreen">
-        <section class="pc-layout-2">
-          <article class="pc-card pc-main-card">
+        <section :class="['pc-layout-2', { 'pc-data-privacy-layout': screenKey === 'dataPrivacy' }]">
+          <article :class="['pc-card', 'pc-main-card', { 'pc-data-privacy-main': screenKey === 'dataPrivacy' }]">
             <span class="pc-eyebrow">账号服务</span><h2>{{ screenMeta.title }}</h2><p class="pc-lead">{{ accountDescription }}</p>
             <template v-if="screenKey === 'schoolBinding'"><div class="pc-status-banner" :class="{ active: bindingActive }"><strong>{{ bindingActive ? '家校绑定已确认' : '当前未绑定老师' }}</strong><small>{{ bindingActive ? `${demoData.teacher.name} · 学情正在同步` : '填写绑定码后提交确认' }}</small></div><label class="pc-field"><span>老师绑定码</span><input v-model="bindingCode" placeholder="例如：WLS-301" /></label><button class="pc-primary" @click="toggleBinding">{{ bindingActive ? '取消当前绑定' : '提交绑定确认' }}</button><span v-if="bindingFeedback" class="pc-save-note">{{ bindingFeedback }}</span></template>
             <template v-else-if="screenKey === 'learningReminder'"><div class="pc-switch-row"><div><strong>学习提醒</strong><small>{{ reminderEnabled ? '每天提醒一次' : '提醒已关闭' }}</small></div><button :class="['pc-switch', { active: reminderEnabled }]" @click="reminderEnabled = !reminderEnabled"><span>{{ reminderEnabled ? '开' : '关' }}</span></button></div><div class="pc-choice-tabs"><button v-for="time in reminderTimes" :key="time" :class="{ active: reminderTime === time }" @click="reminderTime = time">{{ time }}</button></div><div class="pc-tint-note">今天 {{ reminderTime }} 提醒：{{ demoData.student.name }} 先完成 {{ demoData.task.durationMinutes }} 分钟“{{ demoData.task.title }}”练习。</div><button class="pc-primary" @click="reminderSaved = true">{{ reminderSaved ? '提醒设置已保存' : '保存提醒设置' }}</button></template>
-            <template v-else-if="screenKey === 'dataPrivacy'"><div class="pc-form-grid"><label class="pc-field"><span>家长姓名</span><input v-model="guardianName" :readonly="!privacyEditing" /></label><label class="pc-field"><span>手机号</span><input v-model="guardianPhone" :readonly="!privacyEditing" /></label><label class="pc-field"><span>孩子姓名</span><input v-model="studentName" :readonly="!privacyEditing" /></label><label class="pc-field"><span>年级 / 班级</span><input v-model="className" :readonly="!privacyEditing" /></label><label class="pc-field pc-school-field"><span>学校信息</span><div class="pc-school-row"><select v-model="schoolProvince" :disabled="!privacyEditing" aria-label="省"><option v-for="option in schoolProvinceOptions" :key="option" :value="option">{{ option }}</option></select><select v-model="schoolCity" :disabled="!privacyEditing" aria-label="市"><option v-for="option in schoolCityOptions" :key="option" :value="option">{{ option }}</option></select><select v-model="schoolDistrict" :disabled="!privacyEditing" aria-label="区县"><option v-for="option in schoolDistrictOptions" :key="option" :value="option">{{ option }}</option></select><input v-model="schoolName" :readonly="!privacyEditing" placeholder="填写学校名称" aria-label="学校名称" /></div></label></div><button class="pc-secondary pc-profile-edit-button" @click="togglePrivacyEditing">{{ privacyEditing ? '保存资料' : '修改资料' }}</button><span v-if="!privacyEditing && privacySaved" class="pc-save-note">资料已保存</span></template>
+            <template v-else-if="screenKey === 'dataPrivacy'"><div class="pc-form-grid pc-guardian-form"><label class="pc-field"><span>家长姓名</span><input v-model="guardianName" :readonly="!privacyEditing" /></label><label class="pc-field"><span>手机号</span><input v-model="guardianPhone" :readonly="!privacyEditing" /></label></div><button class="pc-secondary pc-profile-edit-button" @click="togglePrivacyEditing">{{ privacyEditing ? '保存资料' : '修改资料' }}</button><span v-if="!privacyEditing && privacySaved" class="pc-save-note">资料已保存</span></template>
             <template v-else-if="screenKey === 'accountSettings'"><div class="pc-setting-group"><div class="pc-setting-head"><strong>系统字体</strong><small>当前：{{ fontSize }}</small></div><div class="pc-choice-tabs"><button v-for="size in fontSizes" :key="size" :class="{ active: fontSize === size }" @click="fontSize = size">{{ size }}</button></div></div><div class="pc-switch-row"><div><strong>声音提醒</strong><small>练习完成和提醒到达时播放提示</small></div><button :class="['pc-switch', { active: soundEnabled }]" @click="soundEnabled = !soundEnabled"><span>{{ soundEnabled ? '开' : '关' }}</span></button></div><div class="pc-setting-group"><div class="pc-setting-head"><strong>账号操作</strong><small>谨慎处理</small></div><button class="pc-danger-link" @click="showCancelModal = true">注销账号 <ChevronRight :size="16" /></button></div></template>
             <template v-else><div class="pc-danger-panel"><strong>注销后将不能继续查看孩子学习服务</strong><p>如果只是暂时不用，建议返回设置页选择“退出登录”。</p><label class="pc-check-row"><input v-model="cancelUnderstood" type="checkbox" /> 我已经知道注销会影响账号和学习数据查看</label></div><button v-if="!cancelConfirm" class="pc-primary pc-danger" :disabled="!cancelUnderstood" @click="cancelConfirm = true">进入二次确认</button><div v-else-if="!cancelSubmitted" class="pc-confirm-panel"><strong>再次确认注销账号</strong><p>如果确定不再使用这个账号，再提交注销申请。</p><button class="pc-secondary" @click="cancelConfirm = false">先不注销</button><button class="pc-danger" @click="cancelSubmitted = true">确认提交注销申请</button></div><span v-else class="pc-save-note">注销申请已提交</span></template>
+            <StudentManager
+              v-if="screenKey === 'dataPrivacy'"
+              :active-child-id="props.activeChildId"
+              :children="props.childOptions"
+              :add-child="props.addChild"
+              :update-child="props.updateChild"
+              :delete-child="props.deleteChild"
+              :set-current-child="selectCurrentChild"
+              compact
+            />
           </article>
           <aside class="pc-card pc-side-stack"><h3>{{ accountDetailTitle }}</h3><div class="pc-selection-list"><div v-for="item in accountDetailItems" :key="item.label" :class="{ 'pc-selection-note': item.label === '提示' }"><small v-if="item.label === '提示'">* {{ item.value }}</small><template v-else><span>{{ item.label }}</span><strong>{{ item.value }}</strong></template></div></div></aside>
         </section>
@@ -183,29 +193,34 @@ import { ArrowLeft, ArrowRight, Camera, ChevronRight, Download, FileDown, Volume
 import DesktopAccountSettings from "./DesktopAccountSettings.vue";
 import DesktopShell from "./DesktopShell.vue";
 import DesktopLearningReport from "./DesktopLearningReport.vue";
+import StudentManager from "../components/StudentManager.vue";
 import { screenDefinitionMap } from "../app/screens";
 import type { DemoEvent } from "../composables/useDemoFlow";
-import { afterClassReviewExam, demoData, featureOverviews, homeFeatures, photoCheckData, practiceEntryScenarios, practiceFlows, schoolRegions, type DemoChild, type PracticeEntryKey, type ScreenKey, type WrongBookTopicKey, wrongBookTopics } from "../data/demoData";
+import { afterClassReviewExam, demoData, featureOverviews, homeFeatures, photoCheckData, practiceEntryScenarios, practiceFlows, schoolRegions, type DemoChild, type PracticeEntryKey, type ScreenKey, type StudentProfile, type WrongBookTopicKey, wrongBookTopics } from "../data/demoData";
 import { studySurveyFields } from "../data/studySurvey";
 
 const props = defineProps<{
   activeTab: "home" | "agent" | "learning" | "profile";
   activeChildId: string;
+  addChild: (student: StudentProfile) => boolean;
   childOptions: DemoChild[];
   currentScreen: ScreenKey;
   goBack: () => void;
   handleAction: (event: DemoEvent) => void;
   handleNav: (tab: "home" | "agent" | "learning" | "profile") => void;
   isElderMode: boolean;
+  deleteChild: (childId: string) => boolean;
   openWrongBookDetail: (topicKey: WrongBookTopicKey) => void;
   reset: () => void;
   selectedPracticeSourceKey: PracticeEntryKey;
   selectedWrongBookTopicKey: WrongBookTopicKey;
   setElderMode: (enabled: boolean) => void;
-  switchChild: (childId: string) => void;
+  switchChild: (childId: string, returnHome?: boolean) => void;
+  updateChild: (childId: string, student: StudentProfile) => boolean;
   startPracticeFromSource: (sourceKey: PracticeEntryKey) => void;
 }>();
 
+const selectCurrentChild = (childId: string) => props.switchChild(childId, false);
 const screenKey = computed(() => props.currentScreen);
 const showBackButton = computed(() => !["home", "agent", "learning", "profile"].includes(props.currentScreen));
 const activeFeatureKey = computed(() => {
