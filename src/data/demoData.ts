@@ -1400,6 +1400,7 @@ export type ScreenKey =
   | "agentResult"
   | "learning"
   | "profile"
+  | "messages"
   | "schoolBinding"
   | "learningReminder"
   | "dataPrivacy"

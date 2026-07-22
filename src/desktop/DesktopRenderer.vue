@@ -9,7 +9,7 @@
     :student-name="demoData.student.name"
     :summary="screenMeta.summary"
     :title="screenMeta.title"
-    :show-topbar="true"
+    :show-topbar="!['accountSettings', 'messages'].includes(currentScreen)"
     :is-elder-mode="isElderMode"
     :set-elder-mode="setElderMode"
     :switch-child="switchChild"
@@ -20,6 +20,11 @@
   >
     <div class="pc-page" :data-font-size="fontSize">
       <DesktopLearningReport v-if="currentScreen === 'progress'" :handle-action="handleAction" />
+      <DesktopSiteMessages
+        v-else-if="currentScreen === 'messages'"
+        :go-back="goBack"
+        :handle-action="handleAction"
+      />
       <DesktopAccountSettings
         v-else-if="currentScreen === 'accountSettings'"
         :font-size="fontSize"
@@ -28,6 +33,7 @@
         :set-font-size="updateFontSize"
         :set-sound-enabled="updateSoundEnabled"
         :handle-action="handleAction"
+        :go-back="goBack"
       />
       <template v-else>
       <div v-if="showCancelModal" class="pc-modal-backdrop" @click.self="showCancelModal = false">
@@ -193,6 +199,7 @@ import { ArrowLeft, ArrowRight, Camera, ChevronRight, Download, FileDown, Volume
 import DesktopAccountSettings from "./DesktopAccountSettings.vue";
 import DesktopShell from "./DesktopShell.vue";
 import DesktopLearningReport from "./DesktopLearningReport.vue";
+import DesktopSiteMessages from "./DesktopSiteMessages.vue";
 import StudentManager from "../components/StudentManager.vue";
 import { screenDefinitionMap } from "../app/screens";
 import type { DemoEvent } from "../composables/useDemoFlow";
@@ -522,7 +529,7 @@ const downloadReview = () => {
 };
 const learningEntries = [{ key: "wrongBook", title: "错题本", badge: "优先处理", summary: "先练重复出错最多的错题。", actionLabel: "查看错题本", icon: "错" }, { key: "examPrep", title: "考前冲刺", badge: "离测评 5 天", summary: "把容易重复失分的地方往前放。", actionLabel: "进入考前冲刺", icon: "冲" }, { key: "progress", title: "学习报告", badge: "变化已整理", summary: "把最近的学习变化讲清楚。", actionLabel: "查看学习报告", icon: "报" }, { key: "teacherFeedback", title: "老师反馈", badge: "老师新提醒", summary: "查看老师提到的进步和关注点。", actionLabel: "查看老师反馈", icon: "师" }];
 const loggedOut = ref(false);
-const accountItems = computed(() => [{ title: "家校绑定", summary: "老师与家长共享同一份学情", event: "OPEN_SCHOOL_BINDING" as DemoEvent, icon: "校" }, { title: "学习提醒", summary: "每天 1 条消息，提醒完成任务", event: "OPEN_LEARNING_REMINDER" as DemoEvent, icon: "提" }, { title: "账号与数据", summary: "账号、孩子信息和数据范围", event: "OPEN_DATA_PRIVACY" as DemoEvent, icon: "隐" }, { title: "设置", summary: "字体、声音、密码和注销", event: "OPEN_ACCOUNT_SETTINGS" as DemoEvent, icon: "设" }, { title: loggedOut.value ? "已退出登录" : "退出登录", summary: loggedOut.value ? "当前已退出登录" : "退出当前家长账号", event: "OPEN_ACCOUNT_SETTINGS" as DemoEvent, icon: "出", action: "logout" as const }]);
+const accountItems = computed(() => [{ title: "家校绑定", summary: "老师与家长共享同一份学情", event: "OPEN_SCHOOL_BINDING" as DemoEvent, icon: "校" }, { title: "站内信", summary: "查看系统通知与任务消息", event: "OPEN_MESSAGES" as DemoEvent, icon: "信" }, { title: "学习提醒", summary: "每天 1 条消息，提醒完成任务", event: "OPEN_LEARNING_REMINDER" as DemoEvent, icon: "提" }, { title: "账号与数据", summary: "账号、孩子信息和数据范围", event: "OPEN_DATA_PRIVACY" as DemoEvent, icon: "隐" }, { title: "设置", summary: "字体、声音、密码和注销", event: "OPEN_ACCOUNT_SETTINGS" as DemoEvent, icon: "设" }, { title: loggedOut.value ? "已退出登录" : "退出登录", summary: loggedOut.value ? "当前已退出登录" : "退出当前家长账号", event: "OPEN_ACCOUNT_SETTINGS" as DemoEvent, icon: "出", action: "logout" as const }]);
 const handleAccountItem = (item: { title: string; event: DemoEvent; action?: "logout" }) => {
   if (item.action === "logout") {
     loggedOut.value = true;

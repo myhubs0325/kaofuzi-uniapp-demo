@@ -90,6 +90,7 @@ import {
   Bell,
   ChevronRight,
   Link2,
+  Mail,
   Settings,
   Shield
 } from "lucide-vue-next";
@@ -114,6 +115,13 @@ const profileMenu: ProfileMenuItem[] = [
     tone: "binding",
     icon: Link2,
     event: "OPEN_SCHOOL_BINDING"
+  },
+  {
+    title: "站内信",
+    summary: "查看系统通知与任务消息",
+    tone: "messages",
+    icon: Mail,
+    event: "OPEN_MESSAGES"
   },
   {
     title: "学习提醒",

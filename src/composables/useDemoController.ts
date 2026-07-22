@@ -85,6 +85,7 @@ export function useDemoController() {
     if (
       event === "OPEN_SCHOOL_BINDING" ||
       event === "OPEN_LEARNING_REMINDER" ||
+      event === "OPEN_MESSAGES" ||
       event === "OPEN_DATA_PRIVACY" ||
       event === "OPEN_ACCOUNT_SETTINGS" ||
       event === "OPEN_ACCOUNT_CANCEL"
@@ -97,7 +98,7 @@ export function useDemoController() {
     }
     if (
       event === "START_TASK" &&
-      (currentScreen.value === "home" || currentScreen.value === "agentResult")
+      (currentScreen.value === "home" || currentScreen.value === "agentResult" || currentScreen.value === "messages")
     ) {
       selectedPracticeSourceKey.value = "dailyBoost";
     }
@@ -119,6 +120,7 @@ export function useDemoController() {
       afterClassReviewKnowledge: "afterClassReviewResult",
       schoolBinding: "profile",
       learningReminder: "profile",
+      messages: "profile",
       dataPrivacy: profileDetailReturnScreen.value,
       accountSettings: "profile",
       accountCancel: "accountSettings",

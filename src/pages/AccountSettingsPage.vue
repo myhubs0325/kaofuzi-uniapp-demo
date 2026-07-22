@@ -53,49 +53,70 @@
       </button>
     </section>
 
-    <section class="account-section">
+    <section class="account-section account-operation-section">
       <div class="account-section-head">
-        <strong>修改密码</strong>
-        <span>安全操作</span>
+        <strong>账号与安全</strong>
+        <span>账号操作</span>
       </div>
-      <div class="account-form-list">
-        <label class="account-input-field">
-          <span>当前密码</span>
-          <input v-model="oldPassword" type="password" placeholder="请输入当前密码" />
-        </label>
-        <label class="account-input-field">
-          <span>新密码</span>
-          <input v-model="newPassword" type="password" placeholder="请输入新密码" />
-        </label>
+      <div class="settings-account-list">
+        <button
+          type="button"
+          class="settings-account-row"
+          :aria-expanded="passwordPanelOpen"
+          aria-controls="password-panel"
+          @click="togglePasswordPanel"
+        >
+          <span class="settings-row-icon password"><KeyRound :size="18" /></span>
+          <span class="settings-row-copy">
+            <strong>修改密码</strong>
+            <small>定期更新密码，保护账号安全</small>
+          </span>
+          <ChevronRight :size="18" :class="['settings-row-chevron', { open: passwordPanelOpen }]" />
+        </button>
+
+        <div v-if="passwordPanelOpen" id="password-panel" class="settings-password-panel">
+          <div class="account-form-list">
+            <label class="account-input-field">
+              <span>当前密码</span>
+              <input v-model="oldPassword" type="password" autocomplete="current-password" placeholder="请输入当前密码" />
+            </label>
+            <label class="account-input-field">
+              <span>新密码</span>
+              <input v-model="newPassword" type="password" autocomplete="new-password" placeholder="至少 8 位字符" />
+            </label>
+            <label class="account-input-field">
+              <span>确认新密码</span>
+              <input v-model="confirmPassword" type="password" autocomplete="new-password" placeholder="再次输入新密码" />
+            </label>
+          </div>
+          <p v-if="passwordError" class="settings-password-error" role="alert">{{ passwordError }}</p>
+          <button type="button" class="settings-password-save" :disabled="!canSavePassword" @click="savePassword">
+            保存新密码
+          </button>
+        </div>
+
+        <button type="button" class="settings-account-row settings-cancel-row" @click="$emit('action', 'OPEN_ACCOUNT_CANCEL')">
+          <span class="settings-row-icon neutral"><UserRoundX :size="18" /></span>
+          <span class="settings-row-copy">
+            <strong>注销账号</strong>
+            <small>永久停用账号并处理相关数据</small>
+          </span>
+          <ChevronRight :size="18" class="settings-row-chevron" />
+        </button>
       </div>
-      <button type="button" class="account-secondary-button" @click="passwordSaved = true">
-        <KeyRound :size="18" />
-        保存新密码
-      </button>
       <section v-if="passwordSaved" class="account-save-strip">
         <CheckCircle2 :size="18" />
         <span>密码修改已完成。</span>
       </section>
     </section>
 
-    <section class="account-section danger">
-      <div class="account-section-head">
-        <strong>账号操作</strong>
-        <span>谨慎处理</span>
-      </div>
-      <div class="settings-danger-list">
-        <button type="button" @click="accountAction = '已退出登录'">
-          <LogOut :size="19" />
-          <span>退出登录</span>
-        </button>
-        <button type="button" class="settings-danger-nav" @click="$emit('action', 'OPEN_ACCOUNT_CANCEL')">
-          <Trash2 :size="19" />
-          <span>注销账号</span>
-          <ChevronRight :size="19" />
-        </button>
-      </div>
-      <section v-if="accountAction" class="account-save-strip warning">
-        <CircleAlert :size="18" />
+    <section class="settings-logout-area">
+      <button type="button" class="settings-logout-button" @click="accountAction = '已退出登录'">
+        <LogOut :size="19" />
+        <span>退出登录</span>
+      </button>
+      <section v-if="accountAction" class="account-save-strip">
+        <CheckCircle2 :size="18" />
         <span>{{ accountAction }}</span>
       </section>
     </section>
@@ -105,13 +126,12 @@
 <script setup lang="ts">
 import {
   CheckCircle2,
-  CircleAlert,
   ChevronRight,
   KeyRound,
   LogOut,
   Settings,
-  Trash2,
-  Type
+  Type,
+  UserRoundX
 } from "lucide-vue-next";
 import { computed, ref } from "vue";
 import PhoneScaffold from "../components/PhoneScaffold.vue";
@@ -121,10 +141,38 @@ import { demoData } from "../data/demoData";
 const fontSizes = ["标准", "大号", "超大"];
 const fontSize = ref("大号");
 const soundEnabled = ref(true);
+const passwordPanelOpen = ref(false);
 const oldPassword = ref("");
 const newPassword = ref("");
+const confirmPassword = ref("");
 const passwordSaved = ref(false);
+const passwordError = ref("");
 const accountAction = ref("");
+
+const canSavePassword = computed(() => Boolean(oldPassword.value && newPassword.value && confirmPassword.value));
+
+function togglePasswordPanel() {
+  passwordPanelOpen.value = !passwordPanelOpen.value;
+  passwordSaved.value = false;
+  passwordError.value = "";
+}
+
+function savePassword() {
+  if (newPassword.value.length < 8) {
+    passwordError.value = "新密码至少需要 8 位字符。";
+    return;
+  }
+  if (newPassword.value !== confirmPassword.value) {
+    passwordError.value = "两次输入的新密码不一致。";
+    return;
+  }
+  oldPassword.value = "";
+  newPassword.value = "";
+  confirmPassword.value = "";
+  passwordError.value = "";
+  passwordPanelOpen.value = false;
+  passwordSaved.value = true;
+}
 
 const fontPreviewClass = computed(() => ({
   "is-large": fontSize.value === "大号",
@@ -136,3 +184,138 @@ defineEmits<{
   navigate: ["home" | "agent" | "learning" | "profile"];
 }>();
 </script>
+
+<style scoped>
+.settings-account-list {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(60, 60, 67, 0.1);
+  border-radius: 18px;
+}
+
+.settings-account-row {
+  width: 100%;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  color: #1d1d1f;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.settings-cancel-row {
+  border-top: 1px solid rgba(60, 60, 67, 0.1);
+}
+
+.settings-row-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #0a84ff;
+  border-radius: 9px;
+}
+
+.settings-row-icon.neutral {
+  color: #6e6e73;
+  background: #e9e9eb;
+}
+
+.settings-row-copy {
+  min-width: 0;
+  flex: 1;
+  display: grid;
+  gap: 3px;
+}
+
+.settings-row-copy strong {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.settings-row-copy small {
+  color: #8e8e93;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.settings-cancel-row .settings-row-copy strong {
+  color: #6e6e73;
+}
+
+.settings-row-chevron {
+  flex: 0 0 auto;
+  color: #c7c7cc;
+  transition: transform 180ms ease;
+}
+
+.settings-row-chevron.open {
+  transform: rotate(90deg);
+}
+
+.settings-password-panel {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  background: #f2f2f7;
+  border-top: 1px solid rgba(60, 60, 67, 0.1);
+}
+
+.settings-password-panel :deep(.account-input-field input) {
+  background: #fff;
+  border-color: rgba(60, 60, 67, 0.12);
+  border-radius: 12px;
+}
+
+.settings-password-error {
+  margin: 0;
+  color: #d70015;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.settings-password-save {
+  min-height: 46px;
+  color: #fff;
+  background: #007aff;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.settings-password-save:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.settings-logout-area {
+  display: grid;
+  gap: 12px;
+  padding: 2px 0 8px;
+}
+
+.settings-logout-button {
+  width: 100%;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #ff3b30;
+  background: #fff;
+  border: 1px solid rgba(60, 60, 67, 0.1);
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+</style>

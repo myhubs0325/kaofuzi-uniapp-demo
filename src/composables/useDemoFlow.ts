@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { addSiteMessage } from "../data/siteMessages";
 import type { ScreenKey } from "../data/demoData";
 
 export type DemoEvent =
@@ -7,7 +8,9 @@ export type DemoEvent =
   | "VIEW_AGENT"
   | "VIEW_LEARNING"
   | "VIEW_PROFILE"
+  | "OPEN_MESSAGES"
   | "VIEW_PROGRESS"
+  | "VIEW_AGENT_RESULT"
   | "SUBMIT_STUDY_SURVEY"
   | "EDIT_STUDY_SURVEY"
   | "OPEN_SCHOOL_BINDING"
@@ -34,7 +37,9 @@ export type DemoEvent =
   | "CONTINUE"
   | "TRY_AGAIN"
   | "OPEN_PHOTO"
+  | "OPEN_PHOTO_RESULT"
   | "ANALYZE_PHOTO"
+  | "OPEN_AFTER_CLASS_REVIEW_RESULT"
   | "PRACTICE_MISTAKE";
 
 export function useDemoFlow() {
@@ -94,11 +99,26 @@ export function useDemoFlow() {
       case "VIEW_PROFILE":
         currentScreen.value = "profile";
         return;
+      case "OPEN_MESSAGES":
+        currentScreen.value = "messages";
+        return;
       case "VIEW_PROGRESS":
         currentScreen.value = "progress";
         return;
+      case "VIEW_AGENT_RESULT":
+        currentScreen.value = "agentResult";
+        return;
       case "SUBMIT_STUDY_SURVEY":
         currentScreen.value = "agentResult";
+        addSiteMessage({
+          id: "survey-completed",
+          category: "system",
+          title: "家长补充信息已整理完成",
+          summary: "系统已结合家长观察生成新的学习建议，点击查看整理结果。",
+          time: "刚刚",
+          action: "VIEW_AGENT_RESULT",
+          tone: "blue"
+        });
         return;
       case "EDIT_STUDY_SURVEY":
         currentScreen.value = "agent";
@@ -132,6 +152,15 @@ export function useDemoFlow() {
         return;
       case "SUBMIT_AFTER_CLASS_REVIEW":
         currentScreen.value = "afterClassReviewResult";
+        addSiteMessage({
+          id: "after-class-review-completed",
+          category: "task",
+          title: "课后复习分析完成",
+          summary: "本次小测已经完成分析，点击查看结果和下一步复习建议。",
+          time: "刚刚",
+          action: "OPEN_AFTER_CLASS_REVIEW_RESULT",
+          tone: "green"
+        });
         return;
       case "OPEN_AFTER_CLASS_KNOWLEDGE":
         currentScreen.value = "afterClassReviewKnowledge";
@@ -173,6 +202,15 @@ export function useDemoFlow() {
           currentScreen.value = "confirm";
         } else if (currentScreen.value === "confirm") {
           currentScreen.value = "mastered";
+          addSiteMessage({
+            id: "practice-completed",
+            category: "task",
+            title: "今日推荐练习已完成",
+            summary: "关键步骤已经完成确认，点击查看本次练习的掌握结果。",
+            time: "刚刚",
+            action: "VIEW_PROGRESS",
+            tone: "green"
+          });
         }
         return;
       case "CONTINUE":
@@ -192,8 +230,23 @@ export function useDemoFlow() {
         currentScreen.value = "photoAnalyzing";
         photoTimer = window.setTimeout(() => {
           currentScreen.value = "photoResult";
+          addSiteMessage({
+            id: "photo-analysis-completed",
+            category: "task",
+            title: "作业识别与分析完成",
+            summary: "系统已完成题目识别并生成错题讲解，点击查看作业分析结果。",
+            time: "刚刚",
+            action: "OPEN_PHOTO_RESULT",
+            tone: "orange"
+          });
           photoTimer = null;
         }, 1200);
+        return;
+      case "OPEN_PHOTO_RESULT":
+        currentScreen.value = "photoResult";
+        return;
+      case "OPEN_AFTER_CLASS_REVIEW_RESULT":
+        currentScreen.value = "afterClassReviewResult";
         return;
       case "PRACTICE_MISTAKE":
         currentScreen.value = "practice";
@@ -208,7 +261,7 @@ export function useDemoFlow() {
   const activeTab = computed(() => {
     if (["agent", "agentResult"].includes(currentScreen.value)) return "agent";
     if (["learning", "progress"].includes(currentScreen.value)) return "learning";
-    if (["profile", "schoolBinding", "learningReminder", "dataPrivacy", "accountSettings", "accountCancel"].includes(currentScreen.value)) return "profile";
+    if (["profile", "messages", "schoolBinding", "learningReminder", "dataPrivacy", "accountSettings", "accountCancel"].includes(currentScreen.value)) return "profile";
     return "home";
   });
 

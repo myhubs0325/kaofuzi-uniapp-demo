@@ -13,6 +13,7 @@ export const screenDefinitions: ScreenDefinition[] = [
   { key: "agentResult", title: "家长反馈结果", summary: "反馈结果和推荐练习。", section: "home" },
   { key: "learning", title: "学习进展", summary: "看进步、反馈、错题与冲刺。", section: "learning" },
   { key: "profile", title: "我的", summary: "家长账号与服务设置。", section: "profile" },
+  { key: "messages", title: "站内信", summary: "查看系统通知与任务消息。", section: "profile" },
   { key: "schoolBinding", title: "学校绑定", summary: "绑定老师与学生关系。", section: "profile" },
   { key: "learningReminder", title: "学习提醒", summary: "提醒时间与方式设置。", section: "profile" },
   { key: "dataPrivacy", title: "账号与数据", summary: "账号资料、学生信息和数据使用说明。", section: "profile" },

@@ -31,6 +31,11 @@
         @action="handleAction"
         @toggle-elder-mode="setElderMode"
       />
+      <SiteMessagesPage
+        v-else-if="currentScreen === 'messages'"
+        @navigate="handleNav"
+        @action="handleAction"
+      />
       <SchoolBindingPage
         v-else-if="currentScreen === 'schoolBinding'"
         @navigate="handleNav"
@@ -204,6 +209,7 @@ import PhotoPage from "../pages/PhotoPage.vue";
 import PhotoResultPage from "../pages/PhotoResultPage.vue";
 import PreviewLessonPage from "../pages/PreviewLessonPage.vue";
 import ProfilePage from "../pages/ProfilePage.vue";
+import SiteMessagesPage from "../pages/SiteMessagesPage.vue";
 import ProgressPage from "../pages/ProgressPage.vue";
 import QuestionPage from "../pages/QuestionPage.vue";
 import RetryPage from "../pages/RetryPage.vue";
